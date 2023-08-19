@@ -7,34 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>URL SHRINKER</h1>
 
-    <form action="/shortUrls" method="POST">
-        <label for="fullUrl">Url</label>
-        <input type="url" name="fullUrl" id="fullUrl">
-        <button type="submit">Shrink</button>
-    </form>
+<h1>URL SHRINKER</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Full URL</th>
-                <th>Short URL</th>
-                <th>Clicks</th>
-            </tr>
-        </thead>
+<form action="/shortUrls" method="POST">
+    <label for="fullUrl">Url</label>
+    <input type="url" name="fullUrl" id="fullUrl">
+    <button type="submit">Shrink</button>
+</form>
 
-        <tbody>
-            <% shortUrls.forEach(shortUrl => { %>
-              <tr>
-                <td><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></td>
-                <td><a href="<%= shortUrl.short %>"><%= shortUrl.short %></a></td>
-                <td><%= shortUrl.clicks %></td>
-              </tr>
-            <% }) %>
-          </tbody>
-
-    </table>
-    
-</body>
-</html>
+<% if (latestShortUrl) { %>
+    <p>Shortened URL: <a href="<%= latestShortUrl.short %>"><%= latestShortUrl.short %></a></p>
+<% } %>

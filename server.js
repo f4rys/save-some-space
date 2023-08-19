@@ -1,7 +1,9 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const ShortUrl = require('./models/shortUrl')
-const app = express()
+const express = require('express');
+const session = require('express-session');
+const flash = require('connect-flash');
+const mongoose = require('mongoose');
+const ShortUrl = require('./models/shortUrl');
+const app = express();
 
 mongoose.connect('mongodb://localhost/urlShortener', {
     useNewUrlParser: true, useUnifiedTopology: true
@@ -10,16 +12,39 @@ mongoose.connect('mongodb://localhost/urlShortener', {
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 
+app.use(session({
+    secret: 'your-secret-key',
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(flash());
+
 app.get('/', async (req, res) => {
-    const shortUrls = await ShortUrl.find()
-    res.render('index', { shortUrls: shortUrls })
-})
+    const shortUrls = await ShortUrl.find();
+    const latestShortUrl = req.flash('latestShortUrl')[0];
+
+    res.render('index', { shortUrls: shortUrls, latestShortUrl: latestShortUrl });
+});
 
 app.post('/shortUrls', async (req, res) => {
-    await ShortUrl.create({ full: req.body.fullUrl })
 
-    res.redirect('/')
-})
+    const existingShortUrl = await ShortUrl.findOne({ short: req.body.shortUrl });
+    if (existingShortUrl) {
+        return res.sendStatus(409);
+    }
+
+    const newShortUrl = new ShortUrl({
+        full: req.body.fullUrl,
+        short: req.body.shortUrl
+    });
+
+    await newShortUrl.save();
+
+    req.flash('latestShortUrl', newShortUrl);
+
+    res.redirect('/');
+});
 
 app.get('/:shortUrl', async (req, res) => {
     const shortUrl = await ShortUrl.findOne({ short: req.params.shortUrl })
