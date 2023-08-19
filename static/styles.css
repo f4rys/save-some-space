@@ -39,8 +39,8 @@
     font-size: 18px;
 }
 
-.shortened-url a {
-    color: #007bff;
+a {
+    color: #529ab1 !important;
     text-decoration: underline;
 }
 
