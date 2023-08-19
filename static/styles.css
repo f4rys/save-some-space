@@ -63,3 +63,23 @@ a:hover, a:active, a:visited, a:link{
     transition: 0.7s;
     border: none!important;
 }
+
+/* Smaller screens */
+@media (max-width: 576px) {
+    .container-full-height {
+        flex-direction: column;
+        height: 90vh;
+    }
+
+    .container{
+        height: 40vh;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .bottom-text{
+        font-size: 1vh!important;
+    }
+}
