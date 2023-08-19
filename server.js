@@ -10,6 +10,7 @@ mongoose.connect('mongodb://localhost/urlShortener', {
 })
 
 app.set('view engine', 'ejs')
+app.use(express.static(__dirname + '/static'));
 app.use(express.urlencoded({ extended: false }))
 
 app.use(session({
