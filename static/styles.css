@@ -76,6 +76,10 @@ a:hover, a:active, a:visited, a:link{
     .shortened-url-display{
         font-size: 100%!important;
     }
+    .logo{
+        max-width: 20%!important;
+        max-height: 20%!important;
+    }
 }
 
 .container-big{
@@ -86,4 +90,9 @@ a:hover, a:active, a:visited, a:link{
 .shortened-url-display{
     display: grid;
     justify-content: center;
+}
+
+.logo{
+    max-width: 7%;
+    max-height: 7%;
 }
