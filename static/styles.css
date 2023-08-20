@@ -60,7 +60,7 @@ a:hover, a:active, a:visited, a:link{
 }
 
 /* Smaller screens */
-@media (max-width: 576px) {
+@media (max-width: 1080px) {
     .container-full-height {
         flex-direction: column;
         height: 90vh;
@@ -72,6 +72,9 @@ a:hover, a:active, a:visited, a:link{
 
     .bottom-text{
         font-size: 1vh!important;
+    }
+    .shortened-url-display{
+        font-size: 100%!important;
     }
 }
 
