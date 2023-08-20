@@ -5,9 +5,16 @@ const mongoose = require('mongoose');
 const ShortUrl = require('./models/shortUrl');
 const app = express();
 
-mongoose.connect('mongodb://localhost/urlShortener', {
-    useNewUrlParser: true, useUnifiedTopology: true
+mongoose.connect(process.env.MONGODB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 })
+.then(() => {
+    console.log('Connected to MongoDB Atlas');
+})
+.catch(err => {
+    console.error('Error connecting to MongoDB Atlas:', err);
+});
 
 app.set('view engine', 'ejs')
 app.use(express.static(__dirname + '/static'));
