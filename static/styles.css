@@ -27,11 +27,11 @@
 }
 
 .header {
-    padding-bottom: 2rem;
-    margin-top: 4rem;
+    padding-bottom: 2vh;
+    margin-top: 6vh;
 }
 .header h1 {
-    font-size: 5rem;
+    font-size: 5vw;
 }
 
 a {
@@ -70,10 +70,6 @@ a:hover, a:active, a:visited, a:link{
         height: 40vh;
     }
 
-    .header h1 {
-        font-size: 2rem;
-    }
-
     .bottom-text{
         font-size: 1vh!important;
     }
@@ -82,4 +78,9 @@ a:hover, a:active, a:visited, a:link{
 .container-big{
     height: 90%;
     width: 80%;
+}
+
+.shortened-url-display{
+    display: grid;
+    justify-content: center;
 }
