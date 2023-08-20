@@ -34,11 +34,6 @@
     font-size: 5rem;
 }
 
-.shortened-url {
-    margin-top: 20px;
-    font-size: 18px;
-}
-
 a {
     color: #529ab1 !important;
     text-decoration: underline;
@@ -71,7 +66,7 @@ a:hover, a:active, a:visited, a:link{
         height: 90vh;
     }
 
-    .container{
+    .form-container{
         height: 40vh;
     }
 
@@ -82,4 +77,9 @@ a:hover, a:active, a:visited, a:link{
     .bottom-text{
         font-size: 1vh!important;
     }
+}
+
+.container-big{
+    height: 90%;
+    width: 80%;
 }
