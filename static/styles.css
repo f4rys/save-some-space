@@ -1,15 +1,3 @@
-/*.background-image {
-    background-image: url('background-image.jpg');
-    background-size: cover;
-    background-repeat: repeat-x;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}*/
-
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600&display=swap');
 
 body{
@@ -33,7 +21,6 @@ body{
     background-repeat: repeat-x;
     position: fixed;
     animation: animatedBackground 120s linear infinite alternate;
-    z-index: -1;
   }
 
 .container-full-height {
@@ -50,17 +37,14 @@ body{
     flex-direction: column;
     align-items: center;
     border-radius: 20px;
-    
     -webkit-box-shadow: 0px 0px 18px -2px rgba(0,0,0,1);
     -moz-box-shadow: 0px 0px 18px -2px rgba(0,0,0,1);
     box-shadow: 0px 0px 18px -2px rgba(0,0,0,1);
-
 }
 
 .header {
     padding-bottom: 2vh;
     margin-top: 6vh;
-    font-family: 'Raleway', sans-serif!important;
     font-weight: 300!important;
 }
 .header h1 {
@@ -73,8 +57,8 @@ a {
 }
 
 a:hover, a:active, a:visited, a:link{
-        text-decoration: none;
-    }
+    text-decoration: none;
+}
 
 .container{
     height: 20vh;
@@ -89,36 +73,11 @@ a:hover, a:active, a:visited, a:link{
 .btn-primary:hover{
     background-color: #3b6d7e !important;
     transition: 0.7s;
-    border: none!important;
-}
-
-/* Smaller screens */
-@media (max-width: 1080px) {
-    .container-full-height {
-        flex-direction: column;
-        height: 90vh;
-    }
-
-    .form-container{
-        height: 40vh;
-    }
-
-    .bottom-text{
-        font-size: 1vh!important;
-    }
-    .shortened-url-display{
-        font-size: 100%!important;
-    }
-    .logo{
-        max-width: 20%!important;
-        max-height: 20%!important;
-    }
 }
 
 .container-big{
     height: 93%;
     width: 80%;
-    font-family: 'Raleway', sans-serif!important;
     font-weight: 500!important;
 }
 
@@ -141,6 +100,43 @@ a:hover, a:active, a:visited, a:link{
 }
 
 .bottom-text{
-    font-family: 'Raleway', sans-serif!important;
     font-weight: 500!important;
+}
+
+/* Smaller screens */
+@media (max-width: 1080px) {
+    .container-full-height {
+        flex-direction: column;
+        height: 90vh;
+    }
+
+    .form-container{
+        height: 40vh;
+        width: 100%!important;
+    }
+
+    .bottom-text{
+        font-size: 2vh!important;
+    }
+
+    .shortened-url-display{
+        font-size: 100%!important;
+    }
+
+    .logo{
+        max-width: 20%!important;
+        max-height: 20%!important;
+    }
+
+    .header h1{
+        font-size: 200%;
+    }
+
+    .container{
+        padding:0%!important;
+    }
+
+    #url-form{
+        width: 100%!important;
+    }
 }

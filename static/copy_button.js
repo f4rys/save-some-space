@@ -11,6 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.execCommand("copy");
         document.body.removeChild(textArea);
         
-        copyButton.textContent = "Copied!";
+        copyButton.textContent = "copied to clipboard";
     });
 });
