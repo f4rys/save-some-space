@@ -1,4 +1,4 @@
-.background-image {
+/*.background-image {
     background-image: url('background-image.jpg');
     background-size: cover;
     background-repeat: repeat-x;
@@ -8,7 +8,33 @@
     width: 100%;
     height: 100%;
     z-index: -1;
+}*/
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600&display=swap');
+
+body{
+    font-family: 'Raleway', sans-serif!important;
+    font-weight: 300!important;
 }
+
+@keyframes animatedBackground {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 100% 100%;
+    }
+  }
+  .background-image {
+    width: 100%;
+    height: 100%;
+    background-image: url('background-image.jpg');
+    background-position: 0px 0px;
+    background-repeat: repeat-x;
+    position: fixed;
+    animation: animatedBackground 120s linear infinite alternate;
+    z-index: -1;
+  }
 
 .container-full-height {
     background-color: rgba(255, 255, 255, 1);
@@ -23,12 +49,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 20px;
+    
+    -webkit-box-shadow: 0px 0px 18px -2px rgba(0,0,0,1);
+    -moz-box-shadow: 0px 0px 18px -2px rgba(0,0,0,1);
+    box-shadow: 0px 0px 18px -2px rgba(0,0,0,1);
+
 }
 
 .header {
     padding-bottom: 2vh;
     margin-top: 6vh;
+    font-family: 'Raleway', sans-serif!important;
+    font-weight: 300!important;
 }
 .header h1 {
     font-size: 5vw;
@@ -50,7 +83,7 @@ a:hover, a:active, a:visited, a:link{
 .btn-primary,.btn-primary:active, .btn-primary:visited {
     background-color: #529ab1 !important;
     transition: 0.7s;
-    border: none!important;;
+    border: none!important;
 }
 
 .btn-primary:hover{
@@ -83,8 +116,10 @@ a:hover, a:active, a:visited, a:link{
 }
 
 .container-big{
-    height: 90%;
+    height: 93%;
     width: 80%;
+    font-family: 'Raleway', sans-serif!important;
+    font-weight: 500!important;
 }
 
 .shortened-url-display{
@@ -95,4 +130,17 @@ a:hover, a:active, a:visited, a:link{
 .logo{
     max-width: 7%;
     max-height: 7%;
+}
+
+.btn:hover{
+    transform: scale(1.01);
+}
+
+.logo:hover, .shortened-url:hover, .shortened-url-button:hover{
+    transform: scale(1.07)!important;
+}
+
+.bottom-text{
+    font-family: 'Raleway', sans-serif!important;
+    font-weight: 500!important;
 }
