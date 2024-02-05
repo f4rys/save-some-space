@@ -2,7 +2,7 @@
 
 ## Save some space.
 
-<div>Simple URL shortener built with Express.js and MongoDB Atlas. Website may require some time to load due to limitations of render.com free hostring.</div>
+<div>Simple URL shortener built with Express.js and MongoDB Atlas. Website may require some time to load due to limitations of render.com free hosting.</div>
 
 <br/>
 
