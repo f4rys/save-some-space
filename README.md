@@ -2,6 +2,8 @@
 
 ## Save some space.
 
+[![Node.js CI](https://github.com/f4rys/Save-some-space/actions/workflows/node.js.yml/badge.svg)](https://github.com/f4rys/Save-some-space/actions/workflows/node.js.yml)
+
 <div>Simple URL shortener built with Express.js and MongoDB Atlas. Website may require some time to load due to limitations of render.com free hosting.</div>
 
 <br/>
