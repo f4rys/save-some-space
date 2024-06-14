@@ -100,6 +100,7 @@ a:hover, a:active, a:visited, a:link{
 }
 
 .bottom-text{
+    font-size: large!important;
     font-weight: 500!important;
 }
 
