@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
-const ShortUrl = require('./models/shortUrl'); // Adjust path
+const ShortUrl = require('./models/shortUrl');
 
 require('dotenv').config();
 
 describe('ShortUrl Model', () => {
 
-  // Connect to MongoDB before tests (consider using a test database)
   beforeAll(async () => {
     await mongoose.connect(process.env.MONGODB, { 
       useNewUrlParser: true, useUnifiedTopology: true
