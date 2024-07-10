@@ -1,0 +1,12 @@
+env:
+  - variable: MONGODB
+    secret: projects/591552123940/secrets/MONGODB_KEY/versions/1
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: SERVER_SECRET
+    secret: projects/591552123940/secrets/SERVER_SECRET_KEY/versions/1
+    availability:
+      - BUILD
+      - RUNTIME
