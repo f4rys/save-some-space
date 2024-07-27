@@ -1,12 +1,10 @@
 const express = require('express');
-const session = require('express-session');
-const flash = require('connect-flash');
-const mongoose = require('mongoose');  
-
-const ShortUrl = require('./models/shortUrl');  
-
+const mongoose = require('mongoose');
 const rateLimit = require('express-rate-limit');
 const validator = require('validator');
+const session = require('express-session'); 
+
+const ShortUrl = require('./models/shortUrl');
 
 const app = express();
 
@@ -29,6 +27,7 @@ const limiter = rateLimit({
     standardHeaders: true,
     legacyHeaders: false,
 });
+
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/static'));
 app.use(express.urlencoded({ extended: false }));
@@ -51,12 +50,18 @@ app.use(
     })
 );
 
-app.use(flash());
+// In-memory cache (replace with a persistent cache like Redis in production)
+const cache = {};
 
 app.get('/', async (req, res) => {
     const shortUrls = await ShortUrl.find();
-    const latestShortUrl = req.flash('latestShortUrl')[0];
-    res.render('index', { shortUrls: shortUrls, latestShortUrl: latestShortUrl });
+    const latestShortUrl = cache.latestShortUrl || null;
+    delete cache.latestShortUrl; // Clear after rendering
+
+    res.render('index', {
+        shortUrls: shortUrls,
+        latestShortUrl: latestShortUrl
+    });
 });
 
 app.post('/shortUrls', async (req, res) => {
@@ -72,13 +77,8 @@ app.post('/shortUrls', async (req, res) => {
 
     await newShortUrl.save();
 
-    const shortUrls = await ShortUrl.find();
-
-    req.flash('latestShortUrl', newShortUrl);
-    res.render('index', { 
-        shortUrls: shortUrls, 
-        latestShortUrl: newShortUrl
-    });
+    cache.latestShortUrl = newShortUrl; // Store in cache
+    res.redirect('/');
 });
 
 app.get('/:shortUrl', async (req, res) => {
