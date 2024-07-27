@@ -1,9 +1,13 @@
 const express = require('express');
 const session = require('express-session');
 const flash = require('connect-flash');
-const mongoose = require('mongoose');
-const ShortUrl = require('./models/shortUrl');
+const mongoose = require('mongoose');  
+
+const ShortUrl = require('./models/shortUrl');  
+
 const rateLimit = require('express-rate-limit');
+const validator = require('validator');
+
 const app = express();
 
 require('dotenv').config();
@@ -28,15 +32,26 @@ const limiter = rateLimit({
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/static'));
 app.use(express.urlencoded({ extended: false }));
+app.use(limiter);
 
-app.use(session({
-    secret: process.env.SERVER_SECRET,
-    resave: true,
-    saveUninitialized: true
-}));
+app.use(
+    session({
+        name: 'ss_sid',
+        secret: process.env.SERVER_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'strict',
+            maxAge: 24 * 60 * 60 * 1000,
+            domain: 'savesome.space',
+            path: '/',
+        },
+    })
+);
 
 app.use(flash());
-app.use(limiter);
 
 app.get('/', async (req, res) => {
     const shortUrls = await ShortUrl.find();
@@ -57,18 +72,33 @@ app.post('/shortUrls', async (req, res) => {
 
     await newShortUrl.save();
 
+    const shortUrls = await ShortUrl.find();
+
     req.flash('latestShortUrl', newShortUrl);
-    res.redirect('/');
+    res.render('index', { 
+        shortUrls: shortUrls, 
+        latestShortUrl: newShortUrl
+    });
 });
 
 app.get('/:shortUrl', async (req, res) => {
-    const shortUrl = await ShortUrl.findOne({ short: req.params.shortUrl })
-    if (shortUrl == null) return res.sendStatus(404)
+    const shortUrl = await ShortUrl.findOne({ short: req.params.shortUrl });
+    if (shortUrl == null) return res.sendStatus(404);
 
-    shortUrl.clicks++
-    shortUrl.save()
+    shortUrl.clicks++;
+    shortUrl.save();  
 
-    res.redirect(shortUrl.full)
-})
 
-app.listen(process.env.PORT || 5000);
+    if (
+        !validator.isURL(shortUrl.full, {
+            protocols: ['http', 'https'],
+            require_protocol: true,
+        })
+    ) {
+        return res.status(400).send('Invalid redirect URL');
+    }
+
+    res.redirect(shortUrl.full);
+});
+
+app.listen(process.env.PORT || 5000); 
