@@ -2,6 +2,7 @@ import { initializeCopyButton } from './copy_button.js';
 
 const urlForm = document.getElementById('url-form');
 const shortenedUrlDisplay = document.getElementById('shortenedUrlDisplay');
+const logoLink = document.querySelector('.logo');
 
 urlForm.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -33,4 +34,12 @@ urlForm.addEventListener('submit', async (event) => {
         console.error('Error:', error);
         shortenedUrlDisplay.innerHTML = '<div class="error">An error occurred. Please try again later.</div>';
     }
+});
+
+logoLink.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    shortenedUrlDisplay.innerHTML = '';
+    document.getElementById('fullUrl').value = '';
+
 });
