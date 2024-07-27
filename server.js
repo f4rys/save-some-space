@@ -2,12 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const rateLimit = require('express-rate-limit');
 const validator = require('validator');
-const session = require('express-session'); 
+const session = require('express-session');
 
 const ShortUrl = require('./models/shortUrl');
 
 const app = express();
-
 require('dotenv').config();
 
 mongoose.connect(process.env.MONGODB, {
@@ -32,36 +31,24 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/static'));
 app.use(express.urlencoded({ extended: false }));
 app.use(limiter);
-
-app.use(
-    session({
-        name: 'ss_sid',
-        secret: process.env.SERVER_SECRET,
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-            httpOnly: true,
-            secure: true,
-            sameSite: 'strict',
-            maxAge: 24 * 60 * 60 * 1000,
-            domain: 'savesome.space',
-            path: '/',
-        },
-    })
-);
-
-// In-memory cache (replace with a persistent cache like Redis in production)
-const cache = {};
+app.use(session({
+    name: 'ss_sid',
+    secret: process.env.SERVER_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'strict',
+        maxAge: 24 * 60 * 60 * 1000,
+        domain: 'savesome.space',
+        path: '/',
+    },
+}));
 
 app.get('/', async (req, res) => {
     const shortUrls = await ShortUrl.find();
-    const latestShortUrl = cache.latestShortUrl || null;
-    delete cache.latestShortUrl; // Clear after rendering
-
-    res.render('index', {
-        shortUrls: shortUrls,
-        latestShortUrl: latestShortUrl
-    });
+    res.render('index', { shortUrls });
 });
 
 app.post('/shortUrls', async (req, res) => {
@@ -76,9 +63,7 @@ app.post('/shortUrls', async (req, res) => {
     });
 
     await newShortUrl.save();
-
-    cache.latestShortUrl = newShortUrl; // Store in cache
-    res.redirect('/');
+    res.json({ shortUrl: newShortUrl.short });
 });
 
 app.get('/:shortUrl', async (req, res) => {
@@ -86,15 +71,9 @@ app.get('/:shortUrl', async (req, res) => {
     if (shortUrl == null) return res.sendStatus(404);
 
     shortUrl.clicks++;
-    shortUrl.save();  
+    shortUrl.save();
 
-
-    if (
-        !validator.isURL(shortUrl.full, {
-            protocols: ['http', 'https'],
-            require_protocol: true,
-        })
-    ) {
+    if (!validator.isURL(shortUrl.full, { protocols: ['http', 'https'], require_protocol: true })) {
         return res.status(400).send('Invalid redirect URL');
     }
 

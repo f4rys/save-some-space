@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+export function initializeCopyButton() {
     const copyButton = document.getElementById("copyButton");
     const shortenedUrl = document.getElementById("shortenedUrl").innerText;
 
@@ -13,4 +13,4 @@ document.addEventListener("DOMContentLoaded", () => {
         
         copyButton.textContent = "copied to clipboard";
     });
-});
+}
