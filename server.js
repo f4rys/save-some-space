@@ -1,10 +1,9 @@
-const express = require('express');
 const mongoose = require('mongoose');
-const rateLimit = require('express-rate-limit');
 const validator = require('validator');
-const session = require('express-session');
-
+const rateLimit = require('express-rate-limit');
 const ShortUrl = require('./models/shortUrl');
+const session = require('express-session');
+const express = require('express');
 
 const app = express();
 require('dotenv').config();
@@ -43,6 +42,7 @@ app.use(session({
         maxAge: 24 * 60 * 60 * 1000,
         domain: 'savesome.space',
         path: '/',
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000)
     },
 }));
 
@@ -52,7 +52,7 @@ app.get('/', async (req, res) => {
 });
 
 app.post('/shortUrls', async (req, res) => {
-    const existingShortUrl = await ShortUrl.findOne({ short: req.body.shortUrl });
+    const existingShortUrl = await ShortUrl.findOne({ short: req.body.shortUrl }).exec();
     if (existingShortUrl) {
         return res.sendStatus(409);
     }
@@ -67,17 +67,18 @@ app.post('/shortUrls', async (req, res) => {
 });
 
 app.get('/:shortUrl', async (req, res) => {
-    const shortUrl = await ShortUrl.findOne({ short: req.params.shortUrl });
+    const shortUrl = await ShortUrl.findOne({ short: req.params.shortUrl }).exec();
     if (shortUrl == null) return res.sendStatus(404);
 
     shortUrl.clicks++;
     shortUrl.save();
 
-    if (!validator.isURL(shortUrl.full, { protocols: ['http', 'https'], require_protocol: true })) {
-        return res.status(400).send('Invalid redirect URL');
-    }
-
-    res.redirect(shortUrl.full);
+    const sanitizedUrl = validator.isURL(shortUrl.full, { 
+        protocols: ['http', 'https'], 
+        require_protocol: true 
+      }) ? shortUrl.full : 'https://savesome.space';
+    
+    res.redirect(sanitizedUrl);
 });
 
 app.listen(process.env.PORT || 5000); 

@@ -17,29 +17,43 @@ urlForm.addEventListener('submit', async (event) => {
 
         if (response.ok) {
             const data = await response.json();
-            shortenedUrlDisplay.innerHTML = `
-                <div class="mb-2 mt-4 shortened-url" id="shortenedUrl">
-                    <a href="${data.shortUrl}">savesome.space/${data.shortUrl}</a>
-                </div>
-                <div class="mt-3">
-                    <button class="btn btn-primary shortened-url-button" id="copyButton">copy to clipboard</button>
-                </div>
-            `;
+
+            // Create elements safely
+            const shortenedUrlDiv = document.createElement('div');
+            shortenedUrlDiv.classList.add('mb-2', 'mt-4', 'shortened-url');
+            shortenedUrlDiv.id = 'shortenedUrl';
+
+            const link = document.createElement('a');
+            link.href = data.shortUrl;
+            link.textContent = `savesome.space/${data.shortUrl}`;
+            shortenedUrlDiv.appendChild(link);
+
+            const buttonDiv = document.createElement('div');
+            buttonDiv.classList.add('mt-3');
+
+            const copyButton = document.createElement('button');
+            copyButton.classList.add('btn', 'btn-primary', 'shortened-url-button');
+            copyButton.id = 'copyButton';
+            copyButton.textContent = 'copy to clipboard';
+            buttonDiv.appendChild(copyButton);
+
+            // Clear existing content and append new elements
+            shortenedUrlDisplay.innerHTML = ''; 
+            shortenedUrlDisplay.appendChild(shortenedUrlDiv);
+            shortenedUrlDisplay.appendChild(buttonDiv);
 
             initializeCopyButton();
         } else {
-            shortenedUrlDisplay.innerHTML = '<div class="error">Error shortening URL. Please try again.</div>';
+            shortenedUrlDisplay.textContent = 'Error shortening URL. Please try again.'; // Use textContent for plain text
         }
     } catch (error) {
         console.error('Error:', error);
-        shortenedUrlDisplay.innerHTML = '<div class="error">An error occurred. Please try again later.</div>';
+        shortenedUrlDisplay.textContent = 'An error occurred. Please try again later.'; 
     }
 });
 
 logoLink.addEventListener('click', (event) => {
     event.preventDefault();
-
     shortenedUrlDisplay.innerHTML = '';
     document.getElementById('fullUrl').value = '';
-
 });
