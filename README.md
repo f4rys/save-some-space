@@ -25,7 +25,7 @@
 
 2. **Add MongoDB Atlas credentials:**
   - Create .env file in the root directory
-  - Add MONGODB variable to the .env file:
+  - Add the following variables to the .env file:
     ```bash
     MONGODB={your-secret-from-mongodb-atlas}
     SERVER_SECRET={your-random-secret}
