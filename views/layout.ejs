@@ -30,33 +30,24 @@
     <script>
         const cookieBanner = document.getElementById('cookie-banner');
         const acceptButton = document.getElementById('accept-cookies');
-    
-        acceptButton.addEventListener('click', () => {
-            localStorage.setItem('cookiesAccepted', 'true');
-            cookieBanner.classList.add('d-none');
-        });
-        
-        if (localStorage.getItem('cookiesAccepted') !== 'true') {
-            cookieBanner.classList.remove('d-none');
-        }
-
         const submitButton = document.getElementById('submitButton');
 
-        // Disable the button initially
         submitButton.disabled = true;
     
-        // Initialize the tooltip
         const tooltip = new bootstrap.Tooltip(submitButton, {
             title: 'Accept cookies to use the service',
-            placement: 'top', // Adjust placement as needed
-            trigger: 'hover' // Show on hover
+            placement: 'top', 
+            trigger: 'disabled'
         });
+    
+        if (localStorage.getItem('cookiesAccepted') !== 'true') {
+            cookieBanner.style.display = 'block';
+        }
     
         acceptButton.addEventListener('click', () => {
             localStorage.setItem('cookiesAccepted', 'true');
             cookieBanner.classList.add('d-none');
-            submitButton.disabled = false;
-            tooltip.hide(); // Hide the tooltip after accepting cookies
+            submitButton.disabled = false; 
         });
     </script>
 
