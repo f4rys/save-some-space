@@ -17,8 +17,6 @@ urlForm.addEventListener('submit', async (event) => {
 
         if (response.ok) {
             const data = await response.json();
-
-            // Create elements safely
             const shortenedUrlDiv = document.createElement('div');
             shortenedUrlDiv.classList.add('mb-2', 'mt-4', 'shortened-url');
             shortenedUrlDiv.id = 'shortenedUrl';
@@ -37,14 +35,13 @@ urlForm.addEventListener('submit', async (event) => {
             copyButton.textContent = 'copy to clipboard';
             buttonDiv.appendChild(copyButton);
 
-            // Clear existing content and append new elements
             shortenedUrlDisplay.innerHTML = ''; 
             shortenedUrlDisplay.appendChild(shortenedUrlDiv);
             shortenedUrlDisplay.appendChild(buttonDiv);
 
             initializeCopyButton();
         } else {
-            shortenedUrlDisplay.textContent = 'Error shortening URL. Please try again.'; // Use textContent for plain text
+            shortenedUrlDisplay.textContent = 'Error shortening URL. Please try again.';
         }
     } catch (error) {
         console.error('Error:', error);

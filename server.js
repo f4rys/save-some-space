@@ -3,6 +3,7 @@ const validator = require('validator');
 const rateLimit = require('express-rate-limit');
 const ShortUrl = require('./models/shortUrl');
 const session = require('express-session');
+const expressLayouts = require('express-ejs-layouts');
 const express = require('express');
 
 const app = express();
@@ -27,6 +28,8 @@ const limiter = rateLimit({
 });
 
 app.set('view engine', 'ejs');
+app.use(expressLayouts);
+app.set('layout', 'layout');
 app.use(express.static(__dirname + '/static'));
 app.use(express.urlencoded({ extended: false }));
 app.use(limiter);
@@ -49,6 +52,18 @@ app.use(session({
 app.get('/', async (req, res) => {
     const shortUrls = await ShortUrl.find();
     res.render('index', { shortUrls });
+});
+
+app.get('/privacy-policy', (req, res) => {
+    res.render('privacy-policy');
+});
+
+app.get('/terms-of-service', (req, res) => {
+    res.render('terms-of-service');
+});
+
+app.get('/about', (req, res) => {
+    res.render('about');
 });
 
 app.post('/shortUrls', async (req, res) => {

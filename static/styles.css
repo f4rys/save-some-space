@@ -51,6 +51,16 @@ body{
     font-size: 5vw;
 }
 
+.header2 {
+    padding-bottom: 2vh;
+    margin-top: 6vh;
+    font-weight: 300!important;
+}
+
+.header2 h1 {
+    font-size: 3vw;
+}
+
 a {
     color: #529ab1 !important;
     text-decoration: underline;
@@ -140,4 +150,27 @@ a:hover, a:active, a:visited, a:link{
     #url-form{
         width: 100%!important;
     }
+}
+
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    z-index: 1000;
+}
+
+.cookie-banner a {
+    color: lightblue;
+}
+
+.scrollable-content {
+    max-height: 200%;
+    padding-left: 100px;
+    padding-right: 100px;
+    overflow-y: auto;
 }
