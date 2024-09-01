@@ -1,31 +1,63 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import mainLogo from "../assets/logo.png";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 function Home() {
+  const [shortenedUrl, setShortenedUrl] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const fullUrl = event.target.fullUrl.value;
+    console.log(fullUrl);
+
+    try {
+      const response = await axios.post("http://localhost:8080/shortUrls", {
+        fullUrl: fullUrl,
+      });
+      setShortenedUrl(response.data.shortUrl);
+    } catch (error) {
+      console.error("Error shortening URL:", error);
+    }
+  };
+
+  const handleCopyClick = async () => {
+    try {
+      await navigator.clipboard.writeText(`savesome.space/${shortenedUrl}`);
+
+      const copyButton = document.getElementById("copyButton");
+      copyButton.textContent = "copied to clipboard";
+    } catch (error) {
+      const copyButton = document.getElementById("copyButton");
+      copyButton.textContent = "failed to copy. try again";
+    }
+  };
+
   return (
     <>
-      <div class="container-big">
-        <header class="text-center py-3 header">
+      <div className="container-big">
+        <header className="text-center py-3 header">
           <Link to="/">
-            <img src={mainLogo} alt="logo" class="mb-3 logo"></img>
+            <img src={mainLogo} alt="logo" className="mb-3 logo"></img>
           </Link>
-          <h1 class="display-4 title">save some space.</h1>
+          <h1 className="display-4 title">save some space.</h1>
         </header>
 
-        <div class="container px-2 my-5">
-          <form id="url-form" action="/shortUrls" method="POST">
+        <div className="container px-2 my-5">
+          <form id="url-form" onSubmit={handleSubmit}>
             <input
               type="url"
-              class="form-control mb-3"
+              className="form-control mb-3"
               id="fullUrl"
               name="fullUrl"
               placeholder="example.com"
               required
             ></input>
-            <div class="d-grid">
+            <div className="d-grid">
               <button
-                class="btn btn-primary btn-lg"
+                className="btn btn-primary btn-lg"
                 id="submitButton"
                 type="submit"
               >
@@ -34,15 +66,33 @@ function Home() {
             </div>
           </form>
 
-          <div
-            id="shortenedUrlDisplay"
-            class="text-center h4 shortened-url-display"
-          ></div>
+          {shortenedUrl && (
+            <div
+              className="text-center h4 shortened-url-display"
+              id="shortenedUrlDisplay"
+            >
+              <div id="shortenedUrl" className="mb-2 mt-4 shortened-url">
+                <a
+                  href={`/${shortenedUrl}`}
+                  target="_blank"
+                >{`savesome.space/${shortenedUrl}`}</a>
+              </div>
+              <div className="mt-3">
+                <button
+                  id="copyButton"
+                  className="btn btn-primary shortened-url-button"
+                  onClick={handleCopyClick}
+                >
+                  copy to clipboard
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
-      <div class="text-center">
-        <div class="h2 bottom-text">
+      <div className="text-center">
+        <div className="h2 bottom-text">
           read more about the <Link to="/about"> project</Link>.
         </div>
       </div>
