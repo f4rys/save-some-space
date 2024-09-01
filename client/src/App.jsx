@@ -4,6 +4,7 @@ import Home from "./components/Home.jsx";
 import TermsOfService from "./components/TermsOfService.jsx";
 import PrivacyPolicy from "./components/PrivacyPolicy.jsx";
 import About from "./components/About.jsx";
+import NotFound from "./components/NotFound.jsx";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/terms-of-service" element={<TermsOfService />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
