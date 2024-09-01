@@ -42,8 +42,7 @@ function Home() {
 
       <div class="text-center">
         <div class="h2 bottom-text">
-          check out my projects on <a href="https://github.com/f4rys">github</a>
-          .
+          read more about the <a href="/about">project</a>.
         </div>
       </div>
     </>
