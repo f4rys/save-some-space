@@ -21,7 +21,7 @@ function CookieBanner() {
         <div className="d-flex align-items-center mx-2">This website uses cookies, which are essential for the functionality of the service.</div>
         <div className="d-flex align-items-center mx-2">
         <Link to="/privacy-policy">Privacy Policy</Link>
-          <div className="mx-1">|</div> 
+          <div className="mx-2">|</div> 
           <Link to="/terms-of-service">Terms of Service</Link>
         </div>
         <div className="d-flex align-items-center mx-2">
