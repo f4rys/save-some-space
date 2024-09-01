@@ -17,7 +17,6 @@ function CatchAll() {
     const fetchFullUrl = async () => {
       try {
         const response = await axios.get(`http://localhost:8080/${shortUrl}`);
-        console.log(response.data.url);
         window.location.href = response.data.url;
       } catch (error) {
         console.error("Error fetching full URL:", error);

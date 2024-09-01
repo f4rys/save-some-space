@@ -9,10 +9,6 @@ function Home({ cookiesAccepted }) {
   const [showCookieMessage, setShowCookieMessage] = useState(false);
   const fullUrlInputRef = useRef(null);
 
-  useEffect(() => {
-    console.log("cookiesAccepted updated:", cookiesAccepted);
-  }, [cookiesAccepted]);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -49,9 +45,8 @@ function Home({ cookiesAccepted }) {
 
   const handleLogoClick = () => {
     setShortenedUrl("");
-    console.log(fullUrlInputRef.current)
     if (fullUrlInputRef.current) {
-      fullUrlInputRef.current.value = '';
+      fullUrlInputRef.current.value = "";
     }
   };
 
