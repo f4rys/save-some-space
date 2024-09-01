@@ -11,8 +11,7 @@ function CatchAll() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const  
- [fetchComplete, setFetchComplete] = useState(false);
+  const [fetchComplete, setFetchComplete] = useState(false);
 
   useEffect(() => {
     const fetchFullUrl = async () => {
