@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-function CookieBanner() {
+function CookieBanner({ onAccept }) {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
@@ -13,6 +13,7 @@ function CookieBanner() {
   const handleAccept = () => {
     localStorage.setItem('cookiesAccepted', 'true');
     setShowBanner(false);
+    onAccept();
   };
 
   return (

@@ -1,14 +1,27 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import mainLogo from "../assets/logo.png";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
-function Home() {
+function Home({ cookiesAccepted }) {
   const [shortenedUrl, setShortenedUrl] = useState("");
+  const [showCookieMessage, setShowCookieMessage] = useState(false);
+
+  useEffect(() => {
+    // This effect will run whenever cookiesAccepted changes
+    console.log("cookiesAccepted updated:", cookiesAccepted);
+  }, [cookiesAccepted]); // Add cookiesAccepted to the dependency array
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!cookiesAccepted) {
+      setShowCookieMessage(true);
+      return;
+    }
+
+    setShowCookieMessage(false);
 
     const fullUrl = event.target.fullUrl.value;
 
@@ -85,6 +98,12 @@ function Home() {
                   copy to clipboard
                 </button>
               </div>
+            </div>
+          )}
+
+          {showCookieMessage && (
+            <div className="text-body-tertiary mb-2 mt-5 text-center h4">
+              accept cookies to use the service.
             </div>
           )}
         </div>
