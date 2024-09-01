@@ -11,7 +11,6 @@ function Home() {
     event.preventDefault();
 
     const fullUrl = event.target.fullUrl.value;
-    console.log(fullUrl);
 
     try {
       const response = await axios.post("http://localhost:8080/shortUrls", {

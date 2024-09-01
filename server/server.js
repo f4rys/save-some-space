@@ -94,9 +94,9 @@ app.get("/:shortUrl", async (req, res) => {
     require_protocol: true,
   })
     ? shortUrl.full
-    : "https://savesome.space";
+    : "http://localhost:5173/";
 
-  res.redirect(sanitizedUrl);
+    res.json({ url: sanitizedUrl });
 });
 
 app.listen(8080, () => {
