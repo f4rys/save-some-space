@@ -1,17 +1,17 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import mainLogo from "../assets/logo.png";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
 function Home({ cookiesAccepted }) {
   const [shortenedUrl, setShortenedUrl] = useState("");
   const [showCookieMessage, setShowCookieMessage] = useState(false);
+  const fullUrlInputRef = useRef(null);
 
   useEffect(() => {
-    // This effect will run whenever cookiesAccepted changes
     console.log("cookiesAccepted updated:", cookiesAccepted);
-  }, [cookiesAccepted]); // Add cookiesAccepted to the dependency array
+  }, [cookiesAccepted]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -47,13 +47,21 @@ function Home({ cookiesAccepted }) {
     }
   };
 
+  const handleLogoClick = () => {
+    setShortenedUrl("");
+    console.log(fullUrlInputRef.current)
+    if (fullUrlInputRef.current) {
+      fullUrlInputRef.current.value = '';
+    }
+  };
+
   return (
     <>
       <div className="container-big">
         <header className="text-center py-3 header">
-          <Link to="/">
+          <a onClick={handleLogoClick}>
             <img src={mainLogo} alt="logo" className="mb-3 logo"></img>
-          </Link>
+          </a>
           <h1 className="display-4 title">save some space.</h1>
         </header>
 
@@ -66,6 +74,7 @@ function Home({ cookiesAccepted }) {
               name="fullUrl"
               placeholder="example.com"
               required
+              ref={fullUrlInputRef}
             ></input>
             <div className="d-grid">
               <button

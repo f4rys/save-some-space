@@ -7,7 +7,7 @@ import About from "./components/About.jsx";
 import CatchAll from "./components/CatchAll.jsx";
 import { Routes, Route } from "react-router-dom";
 import CookieBanner from "./components/CookieBanner";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function App() {
   const [cookiesAccepted, setCookiesAccepted] = useState(
