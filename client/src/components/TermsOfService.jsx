@@ -5,16 +5,16 @@ import { Link } from "react-router-dom";
 function TermsOfService() {
   return (
     <>
-      <div class="container-big">
-        <header class="text-center py-3 header2">
+      <div className="container-big">
+        <header className="text-center py-3 header2">
           <Link to="/">
-            <img src={mainLogo} alt="logo" class="mb-3 logo"></img>
+            <img src={mainLogo} alt="logo" className="mb-3 logo"></img>
           </Link>
-          <h1 class="display-4 title">terms of service.</h1>
+          <h1 className="display-4 title">terms of service.</h1>
         </header>
 
-        <div class="container px-2 my-2">
-          <div class="scrollable-content">
+        <div className="container px-2 my-2">
+          <div className="scrollable-content">
             <h2>1. Acceptance of Terms</h2>
             <p>
               By using <i>save some space.</i> (the "Service"), you agree to be

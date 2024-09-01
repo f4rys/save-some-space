@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 function About() {
   return (
     <>
-      <div class="container-big">
-        <header class="text-center py-3 header">
+      <div className="container-big">
+        <header className="text-center py-3 header">
           <Link to="/">
-            <img src={mainLogo} alt="logo" class="mb-3 logo"></img>
+            <img src={mainLogo} alt="logo" className="mb-3 logo"></img>
           </Link>
-          <h1 class="display-4 title">about.</h1>
+          <h1 className="display-4 title">about.</h1>
         </header>
       </div>
     </>

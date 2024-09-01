@@ -7,9 +7,9 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <div class="background-image"></div>
+    <div className="background-image"></div>
 
-    <div class="container-full-height">
+    <div className="container-full-height">
       <BrowserRouter>
         <App />
         <CookieBanner />
