@@ -1,14 +1,15 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import mainLogo from "../assets/logo.png";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
     <>
       <div class="container-big">
         <header class="text-center py-3 header">
-          <a href="/">
+          <Link to="/">
             <img src={mainLogo} alt="logo" class="mb-3 logo"></img>
-          </a>
+          </Link>
           <h1 class="display-4 title">save some space.</h1>
         </header>
 
@@ -42,7 +43,7 @@ function Home() {
 
       <div class="text-center">
         <div class="h2 bottom-text">
-          read more about the <a href="/about">project</a>.
+          read more about the <Link to="/about"> project</Link>.
         </div>
       </div>
     </>
