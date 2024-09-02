@@ -1,10 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import mainLogo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import NotFound from "./NotFound";
 import axios from "axios";
+import Logo from "./Logo.jsx";
 
 function CatchAll() {
   const { shortUrl } = useParams();
@@ -37,7 +37,7 @@ function CatchAll() {
       <div className="container-big">
         <header className="text-center py-3 header">
           <Link to="/">
-            <img src={mainLogo} alt="logo" className="mb-3 logo"></img>
+          <Logo />
           </Link>
           <h1 className="display-4 title">save some space.</h1>
         </header>

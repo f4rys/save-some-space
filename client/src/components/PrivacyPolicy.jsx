@@ -1,6 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "overlayscrollbars/overlayscrollbars.css";
-import mainLogo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import Logo from "./Logo.jsx";

@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import mainLogo from "../assets/logo.png";
 import { Link } from "react-router-dom";
+import Logo from "./Logo.jsx";
 
 function NotFound() {
   return (
@@ -8,7 +8,7 @@ function NotFound() {
       <div className="container-big">
         <header className="text-center py-3 header">
           <Link to="/">
-            <img src={mainLogo} alt="logo" className="mb-3 logo"></img>
+            <Logo />
           </Link>
           <h1 className="display-4 title">404.</h1>
         </header>
