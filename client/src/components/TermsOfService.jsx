@@ -1,6 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "overlayscrollbars/overlayscrollbars.css";
 import mainLogo from "../assets/logo.png";
 import { Link } from "react-router-dom";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 
 function TermsOfService() {
   return (
@@ -13,8 +15,12 @@ function TermsOfService() {
           <h1 className="display-4 title">terms of service.</h1>
         </header>
 
-        <div className="container px-2 my-2">
-          <div className="scrollable-content">
+        <div className="px-2 my-2 scrollable-text-container">
+          <OverlayScrollbarsComponent 
+          defer 
+          className="scrollable-content"
+          options={{ scrollbars: { theme: 'os-scrollbar' } }}
+          >
             <h2>1. Acceptance of Terms</h2>
             <p>
               By using <i>save some space.</i> (the "Service"), you agree to be
@@ -69,7 +75,7 @@ function TermsOfService() {
               These Terms of Service shall be governed by and construed in
               accordance with the laws of Poland.
             </p>
-          </div>
+            </OverlayScrollbarsComponent>
         </div>
       </div>
     </>

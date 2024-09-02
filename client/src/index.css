@@ -92,7 +92,7 @@ a:link {
 }
 
 .container-big {
-  height: 93%;
+  height: 100%;
   width: 80%;
   font-weight: 500 !important;
 }
@@ -120,6 +120,7 @@ a:link {
 .bottom-text {
   font-size: large !important;
   font-weight: 500 !important;
+  margin-bottom: 12%;
 }
 
 /* Smaller screens */
@@ -181,4 +182,34 @@ a:link {
   padding-left: 100px;
   padding-right: 100px;
   overflow-y: auto;
+}
+
+.scrollable-text-container {
+  border-top: 1px solid #e2e2e2;
+  height:26%;
+}
+
+.scrollable-text-container h2 {
+  text-align: center;
+  margin-top: 4%;
+  margin-bottom: 3%;
+}
+
+.scrollable-text-container p, ul {
+  line-height: 1.6;
+}
+
+.scrollable-text-container ul {
+  list-style: disc;
+}
+
+.os-scrollbar {
+  --os-size: 6px;
+  --os-padding-axis: 3.5%;
+  --os-handle-border-radius: 10px;
+  --os-handle-bg: #e2e2e2;
+  --os-handle-bg-hover: #cccccc;
+  --os-handle-bg-active: #cccccc;
+  --os-handle-min-size: 20%;
+  --os-handle-max-size: 20%;
 }

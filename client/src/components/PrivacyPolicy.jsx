@@ -1,6 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "overlayscrollbars/overlayscrollbars.css";
 import mainLogo from "../assets/logo.png";
 import { Link } from "react-router-dom";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 
 function PrivacyPolicy() {
   return (
@@ -13,8 +15,12 @@ function PrivacyPolicy() {
           <h1 className="display-4 title">privacy policy.</h1>
         </header>
 
-        <div className="container px-2 my-2">
-          <div className="scrollable-content">
+        <div className="px-2 my-2 scrollable-text-container">
+          <OverlayScrollbarsComponent 
+          defer 
+          className="scrollable-content"
+          options={{ scrollbars: { theme: 'os-scrollbar' } }}
+          >
             <h2>1. Information Collected</h2>
             <p>
               The following information may be collected when you use the
@@ -63,7 +69,7 @@ function PrivacyPolicy() {
                 wojciech.michal.bartoszek@gmail.com
               </a>
             </p>
-          </div>
+          </OverlayScrollbarsComponent>
         </div>
       </div>
     </>
