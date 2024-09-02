@@ -1,8 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import mainLogo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import Logo from "./Logo.jsx";
 
 function Home({ cookiesAccepted }) {
   const [shortenedUrl, setShortenedUrl] = useState("");
@@ -55,7 +55,7 @@ function Home({ cookiesAccepted }) {
       <div className="container-big">
         <header className="text-center py-3 header">
           <a onClick={handleLogoClick}>
-            <img src={mainLogo} alt="logo" className="mb-3 logo"></img>
+            <Logo />
           </a>
           <h1 className="display-4 title">save some space.</h1>
         </header>
