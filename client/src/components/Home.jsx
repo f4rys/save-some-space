@@ -1,8 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import Logo from "./Logo.jsx";
+import PropTypes from 'prop-types';
 
 function Home({ cookiesAccepted }) {
   const [shortenedUrl, setShortenedUrl] = useState("");
@@ -121,5 +122,9 @@ function Home({ cookiesAccepted }) {
     </>
   );
 }
+
+Home.propTypes = {
+  cookiesAccepted: PropTypes.bool.isRequired, // Define cookiesAccepted as a required boolean
+};
 
 export default Home;

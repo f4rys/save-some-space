@@ -23,7 +23,7 @@ function TermsOfService() {
           >
             <h2>1. Acceptance of Terms</h2>
             <p>
-              By using <i>save some space.</i> (the "Service"), you agree to be
+              By using <i>save some space.</i> (the &quot;Service&quot;), you agree to be
               bound by these Terms of Service. If you do not agree to these
               terms, you may not use the Service.
             </p>
@@ -51,7 +51,7 @@ function TermsOfService() {
 
             <h2>4. Disclaimer of Warranties</h2>
             <p>
-              The Service is provided "as is" without any warranties, express or
+              The Service is provided &quot;as is&quot; without any warranties, express or
               implied. We do not guarantee the availability, accuracy, or
               reliability of the Service.
             </p>

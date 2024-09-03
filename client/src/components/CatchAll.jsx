@@ -9,7 +9,6 @@ import Logo from "./Logo.jsx";
 function CatchAll() {
   const { shortUrl } = useParams();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [fetchComplete, setFetchComplete] = useState(false);
 
@@ -22,7 +21,6 @@ function CatchAll() {
         console.error("Error fetching full URL:", error);
         setError(error);
       } finally {
-        setIsLoading(false);
         setFetchComplete(true);
       }
     };

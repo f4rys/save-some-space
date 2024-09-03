@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 function CookieBanner({ onAccept }) {
   const [showBanner, setShowBanner] = useState(false);
@@ -32,5 +33,9 @@ function CookieBanner({ onAccept }) {
     )
   );
 }
+
+CookieBanner.propTypes = {
+  onAccept: PropTypes.func.isRequired,
+};
 
 export default CookieBanner;

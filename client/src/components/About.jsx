@@ -28,7 +28,7 @@ function About() {
             <p>
               This service is a straightforward URL shortening service designed
               to make your long, unwieldy links more manageable and shareable.
-              Whether you're sharing links on social media, in emails, or
+              Whether you&apos;re sharing links on social media, in emails, or
               anywhere else, a shortened link can save space, look cleaner, and
               make your content more discoverable.
             </p>
@@ -97,7 +97,7 @@ function About() {
             <h2>About the Developer</h2>
 
             <p>
-              Hi, I'm Wojciech Bartoszek, the creator of <i>save some space.</i> I'm
+              Hi, I&apos;m Wojciech Bartoszek, the creator of <i>save some space.</i> I&apos;m
               passionate about building web applications and exploring new
               technologies. This project was a fun way to learn more about
               React, Express.js, and MongoDB.
