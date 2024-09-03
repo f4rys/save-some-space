@@ -86,9 +86,6 @@ app.get("/:shortUrl", async (req, res) => {
   }).exec();
   if (shortUrl == null) return res.sendStatus(404);
 
-  shortUrl.clicks++;
-  shortUrl.save();
-
   const sanitizedUrl = validator.isURL(shortUrl.full, {
     protocols: ["http", "https"],
     require_protocol: true,
