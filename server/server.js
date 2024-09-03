@@ -6,6 +6,7 @@ const session = require("express-session");
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
+const shortId = require("shortid"); // Import shortId
 
 const app = express();
 require("dotenv").config({ path: path.join(__dirname, "../.env") });
@@ -58,6 +59,21 @@ app.get("/", async (req, res) => {
   res.json({ shortUrls: shortUrls });
 });
 
+async function generateUniqueShortId() {
+  let unique = false;
+  let newShortId;
+
+  while (!unique) {
+    newShortId = shortId.generate();
+    const existingShortUrl = await ShortUrl.findOne({ short: newShortId }).exec();
+    if (!existingShortUrl) {
+      unique = true;
+    }
+  }
+
+  return newShortId;
+}
+
 app.post("/shortUrls", async (req, res) => {
   try {
     const existingShortUrl = await ShortUrl.findOne({
@@ -67,9 +83,11 @@ app.post("/shortUrls", async (req, res) => {
       return res.sendStatus(409);
     }
 
+    const newShortId = await generateUniqueShortId();
+
     const newShortUrl = new ShortUrl({
       full: req.body.fullUrl,
-      short: req.body.shortUrl,
+      short: newShortId,
     });
 
     await newShortUrl.save();
@@ -93,11 +111,11 @@ app.get("/:shortUrl", async (req, res) => {
     ? shortUrl.full
     : "http://localhost:5173/";
 
-    res.json({ url: sanitizedUrl });
+  res.json({ url: sanitizedUrl });
 });
 
 app.listen(8080, () => {
   console.log("Server started on port 8080");
 });
 
-module.exports = app; 
+module.exports = app;
