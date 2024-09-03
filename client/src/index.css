@@ -222,6 +222,10 @@ ul {
   align-items: center;
 }
 
+.top-image:hover {
+  cursor: pointer;
+}
+
 .top-image {
   position: absolute;
   width: 7%;
