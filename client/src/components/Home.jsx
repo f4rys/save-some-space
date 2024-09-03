@@ -62,7 +62,7 @@ function Home({ cookiesAccepted }) {
         </header>
 
         <div className="container px-2 my-5">
-          <form id="url-form" onSubmit={handleSubmit}>
+          <form id="url-form" onSubmit={handleSubmit} data-testid="url-form">
             <input
               type="url"
               className="form-control mb-3"
