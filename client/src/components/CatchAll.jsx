@@ -8,26 +8,30 @@ function CatchAll() {
   const { shortUrl } = useParams();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
-  const [fetchComplete, setFetchComplete] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [redirecting, setRedirecting] = useState(false);
 
   useEffect(() => {
     const fetchFullUrl = async () => {
       try {
         const response = await axios.get(`http://localhost:8080/${shortUrl}`);
+        setRedirecting(true);
         window.location.href = response.data.url;
       } catch (error) {
         console.error("Error fetching full URL:", error);
         setError(error);
       } finally {
-        setFetchComplete(true);
+        setLoading(false);
       }
     };
 
     fetchFullUrl();
   }, [shortUrl, navigate]);
-  if (error && fetchComplete) {
+
+  if (!loading && error && !redirecting) {
     return <NotFound />;
   }
+
   return (
     <>
       <div className="text-center pb-3">
