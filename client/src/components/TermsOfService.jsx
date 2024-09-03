@@ -7,7 +7,6 @@ import Logo from "./Logo.jsx";
 function TermsOfService() {
   return (
     <>
-      <div className="container-big">
         <header className="text-center py-3 header2">
           <Link to="/">
             <Logo />
@@ -77,7 +76,6 @@ function TermsOfService() {
             </p>
           </OverlayScrollbarsComponent>
         </div>
-      </div>
     </>
   );
 }

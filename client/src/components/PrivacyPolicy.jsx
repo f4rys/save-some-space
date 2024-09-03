@@ -7,7 +7,6 @@ import Logo from "./Logo.jsx";
 function PrivacyPolicy() {
   return (
     <>
-      <div className="container-big">
         <header className="text-center py-3 header2">
           <Link to="/">
             <Logo />
@@ -71,7 +70,6 @@ function PrivacyPolicy() {
             </p>
           </OverlayScrollbarsComponent>
         </div>
-      </div>
     </>
   );
 }

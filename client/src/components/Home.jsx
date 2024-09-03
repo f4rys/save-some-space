@@ -53,7 +53,6 @@ function Home({ cookiesAccepted }) {
 
   return (
     <>
-      <div className="container-big">
         <header className="text-center py-3 header">
           <a onClick={handleLogoClick}>
             <Logo />
@@ -112,13 +111,13 @@ function Home({ cookiesAccepted }) {
             </div>
           )}
         </div>
-      </div>
 
-      <div className="text-center">
+        <div className="text-center">
         <div className="h2 bottom-text">
           read more about the <Link to="/about"> project</Link>.
         </div>
       </div>
+
     </>
   );
 }

@@ -16,13 +16,18 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Home cookiesAccepted={cookiesAccepted} />} />
-        <Route path="/terms-of-service" element={<TermsOfService />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/:shortUrl" element={<CatchAll />} />
-      </Routes>
+      <div className="container-big">
+        <Routes>
+          <Route
+            path="/"
+            element={<Home cookiesAccepted={cookiesAccepted} />}
+          />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/:shortUrl" element={<CatchAll />} />
+        </Routes>
+      </div>
       <CookieBanner onAccept={() => setCookiesAccepted(true)} />
     </>
   );

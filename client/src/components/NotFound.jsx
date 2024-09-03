@@ -5,7 +5,6 @@ import Logo from "./Logo.jsx";
 function NotFound() {
   return (
     <>
-      <div className="container-big">
         <header className="text-center py-3 header">
           <Link to="/">
             <Logo />
@@ -21,7 +20,6 @@ function NotFound() {
             Please check the URL and try again.
           </div>
         </div>
-      </div>
     </>
   );
 }

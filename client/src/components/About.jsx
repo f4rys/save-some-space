@@ -7,7 +7,6 @@ import Logo from "./Logo.jsx";
 function About() {
   return (
     <>
-      <div className="container-big">
         <header className="text-center py-3 header2">
           <Link to="/">
             <Logo />
@@ -138,7 +137,6 @@ function About() {
             <p></p>
           </OverlayScrollbarsComponent>
         </div>
-      </div>
     </>
   );
 }

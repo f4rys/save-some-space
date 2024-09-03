@@ -32,7 +32,6 @@ function CatchAll() {
   }
   return (
     <>
-      <div className="container-big">
         <header className="text-center py-3 header">
           <Link to="/">
           <Logo />
@@ -43,7 +42,6 @@ function CatchAll() {
         <div className="container px-2 my-4">
           <div className="text-center display-4 my-2">Redirecting...</div>
         </div>
-      </div>
     </>
   );
 }
