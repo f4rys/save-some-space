@@ -1,4 +1,3 @@
-import React from "react";
 import topImageSrc from "../assets/logo_front.png";
 import bottomImageSrc from "../assets/logo_back.png";
 import { useLogoClick } from "./LogoContext";

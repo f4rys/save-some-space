@@ -1,6 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 
@@ -9,8 +8,9 @@ function Home({
   fullUrlInputRef,
   setShortenedUrl,
   shortenedUrl,
+  showCookieMessage,
+  setShowCookieMessage,
 }) {
-  const [showCookieMessage, setShowCookieMessage] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -115,6 +115,11 @@ function Home({
 
 Home.propTypes = {
   cookiesAccepted: PropTypes.bool.isRequired,
+  fullUrlInputRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  setShortenedUrl: PropTypes.func.isRequired,
+  shortenedUrl: PropTypes.string,
+  showCookieMessage: PropTypes.bool.isRequired,
+  setShowCookieMessage: PropTypes.func.isRequired,
 };
 
 export default Home;
