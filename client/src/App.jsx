@@ -18,15 +18,18 @@ function App() {
   );
   const [shortenedUrl, setShortenedUrl] = useState("");
   const fullUrlInputRef = useRef(null);
+  const [showCookieMessage, setShowCookieMessage] = useState(false);
 
   const location = useLocation();
   const isHome = location.pathname === "/";
 
   const handleLogoClick = () => {
     setShortenedUrl("");
+    setShowCookieMessage(false);
     if (fullUrlInputRef.current) {
       fullUrlInputRef.current.value = "";
     }
+      
   };
 
   return (
@@ -47,6 +50,8 @@ function App() {
                   fullUrlInputRef={fullUrlInputRef}
                   setShortenedUrl={setShortenedUrl}
                   shortenedUrl={shortenedUrl}
+                  showCookieMessage={showCookieMessage}
+                  setShowCookieMessage={setShowCookieMessage}
                 />
               }
             />
