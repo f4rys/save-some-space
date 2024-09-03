@@ -43,8 +43,7 @@ body {
   box-shadow: 0px 0px 18px -2px rgba(0, 0, 0, 1);
 }
 
-.header {
-  padding-bottom: 2vh;
+.logo-header {
   margin-top: 6vh;
   font-weight: 300 !important;
 }
@@ -187,7 +186,7 @@ a:link {
 
 .scrollable-text-container {
   border-top: 1px solid #e2e2e2;
-  height:26%;
+  height: 26%;
 }
 
 .scrollable-text-container h2 {
@@ -196,7 +195,8 @@ a:link {
   margin-bottom: 3%;
 }
 
-.scrollable-text-container p, ul {
+.scrollable-text-container p,
+ul {
   line-height: 1.6;
 }
 
@@ -216,10 +216,10 @@ a:link {
 }
 
 .image-container {
-  position: relative; 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .top-image {

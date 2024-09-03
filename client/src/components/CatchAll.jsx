@@ -1,10 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import NotFound from "./NotFound";
 import axios from "axios";
-import Logo from "./Logo.jsx";
 
 function CatchAll() {
   const { shortUrl } = useParams();
@@ -32,16 +30,13 @@ function CatchAll() {
   }
   return (
     <>
-        <header className="text-center py-3 header">
-          <Link to="/">
-          <Logo />
-          </Link>
-          <h1 className="display-4 title">save some space.</h1>
-        </header>
+      <div className="text-center pb-3">
+        <h1 className="display-4 title">save some space.</h1>
+      </div>
 
-        <div className="container px-2 my-4">
-          <div className="text-center display-4 my-2">Redirecting...</div>
-        </div>
+      <div className="container px-2 my-4">
+        <div className="text-center display-4 my-2">Redirecting...</div>
+      </div>
     </>
   );
 }

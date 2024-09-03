@@ -5,30 +5,59 @@ import TermsOfService from "./components/TermsOfService.jsx";
 import PrivacyPolicy from "./components/PrivacyPolicy.jsx";
 import About from "./components/About.jsx";
 import CatchAll from "./components/CatchAll.jsx";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import CookieBanner from "./components/CookieBanner";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import Logo from "./components/Logo";
+import { Link } from "react-router-dom";
+import { LogoProvider } from "./components/LogoContext";
 
 function App() {
   const [cookiesAccepted, setCookiesAccepted] = useState(
     localStorage.getItem("cookiesAccepted") === "true"
   );
+  const [shortenedUrl, setShortenedUrl] = useState("");
+  const fullUrlInputRef = useRef(null);
+
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
+  const handleLogoClick = () => {
+    setShortenedUrl("");
+    if (fullUrlInputRef.current) {
+      fullUrlInputRef.current.value = "";
+    }
+  };
 
   return (
     <>
-      <div className="container-big">
-        <Routes>
-          <Route
-            path="/"
-            element={<Home cookiesAccepted={cookiesAccepted} />}
-          />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/:shortUrl" element={<CatchAll />} />
-        </Routes>
-      </div>
-      <CookieBanner onAccept={() => setCookiesAccepted(true)} />
+      <LogoProvider handleLogoClick={isHome ? handleLogoClick : null}>
+        <div className="container-big">
+          <div className="text-center pt-3 logo-header">
+            <Link to="/">
+              <Logo />
+            </Link>
+          </div>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  cookiesAccepted={cookiesAccepted}
+                  fullUrlInputRef={fullUrlInputRef}
+                  setShortenedUrl={setShortenedUrl}
+                  shortenedUrl={shortenedUrl}
+                />
+              }
+            />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/:shortUrl" element={<CatchAll />} />
+          </Routes>
+        </div>
+        <CookieBanner onAccept={() => setCookiesAccepted(true)} />
+      </LogoProvider>
     </>
   );
 }
