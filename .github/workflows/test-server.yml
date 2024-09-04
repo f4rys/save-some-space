@@ -1,0 +1,30 @@
+name: Test server
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      MONGODB: ${{ secrets.MONGODB }} 
+    defaults:
+      run:
+        working-directory: 'server'
+    strategy:
+      matrix:
+        node-version: ['20.15.1']
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Node.js ${{ matrix.node-version }} and install dependencies
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: '**/package-lock.json'
+    - run: npm ci
+    - run: npm test
