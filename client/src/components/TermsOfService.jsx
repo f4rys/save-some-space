@@ -69,6 +69,7 @@ function TermsOfService() {
             These Terms of Service shall be governed by and construed in
             accordance with the laws of Poland.
           </p>
+          <div className="empty-banner"></div>
         </OverlayScrollbarsComponent>
       </div>
     </>

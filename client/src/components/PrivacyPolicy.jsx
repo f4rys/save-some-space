@@ -62,6 +62,7 @@ function PrivacyPolicy() {
               wojciech.michal.bartoszek@gmail.com
             </a>
           </p>
+          <div className="empty-banner"></div>
         </OverlayScrollbarsComponent>
       </div>
     </>

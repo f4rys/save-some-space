@@ -102,11 +102,6 @@ a:link {
   justify-content: center;
 }
 
-.logo {
-  max-width: 7%;
-  max-height: 7%;
-}
-
 .btn:hover {
   transform: scale(1.01);
 }
@@ -118,47 +113,77 @@ a:link {
 }
 
 .bottom-text {
-  font-size: large !important;
+  font-size: 2vh !important;
   font-weight: 500 !important;
-  margin-top: 14%;
+}
+
+.empty-banner {
+  height: 5vh;
 }
 
 /* Smaller screens */
 @media (max-width: 1080px) {
   .container-full-height {
-    flex-direction: column;
-    height: 90vh;
-  }
-
-  .form-container {
-    height: 40vh;
-    width: 100% !important;
-  }
-
-  .bottom-text {
-    font-size: 2vh !important;
+    height: 80vh;
   }
 
   .shortened-url-display {
     font-size: 100% !important;
   }
 
-  .logo {
-    max-width: 20% !important;
-    max-height: 20% !important;
-  }
-
   .header h1 {
-    font-size: 200%;
+    font-size: 12vw;
   }
 
-  .container {
-    padding: 0% !important;
+  .scrollable-text-container {
+    height: 30%!important;
   }
 
-  #url-form {
-    width: 100% !important;
+  .scrollable-text-container h2 {
+    margin-top: 10%!important;
+    margin-bottom: 10%!important;
   }
+
+  .scrollable-content {
+    padding-left: 4vw!important;
+    padding-right: 4vw!important;
+    text-align: center!important;
+  }
+
+  .container-big {
+    width: 85%!important;
+  }
+
+  ul {
+    text-align: center;
+    list-style-position: inside!important;
+    padding-left: 0!important;
+  }
+  ul li {
+    margin-bottom: 1.5vh!important;
+  }
+
+  .cookie-banner {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cookie-banner > .cookie-text {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .cookie-banner > .cookie-links-and-button {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cookie-banner > .cookie-links-and-button > div {
+    margin: 0 0;
+  }
+
 }
 
 .cookie-banner {
@@ -171,6 +196,9 @@ a:link {
   padding: 15px;
   text-align: center;
   z-index: 1000;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .cookie-banner a {
@@ -179,9 +207,9 @@ a:link {
 
 .scrollable-content {
   max-height: 200%;
-  padding-left: 100px;
-  padding-right: 100px;
-  overflow-y: auto;
+  padding-left: 6vw;
+  padding-right: 6vw;
+  word-break: break-word!important;
 }
 
 .scrollable-text-container {
@@ -206,7 +234,7 @@ ul {
 
 .os-scrollbar {
   --os-size: 6px;
-  --os-padding-axis: 3.5%;
+  --os-padding-axis: 4vh;
   --os-handle-border-radius: 10px;
   --os-handle-bg: #e2e2e2;
   --os-handle-bg-hover: #cccccc;
@@ -228,11 +256,11 @@ ul {
 
 .top-image {
   position: absolute;
-  width: 7%;
+  width: 9vh;
 }
 
 .bottom-image {
-  width: 7%;
+  width: 9vh;
 }
 
 .bottom-image {

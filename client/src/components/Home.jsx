@@ -52,7 +52,7 @@ function Home({
         <h1 className="display-4 title">save some space.</h1>
       </div>
 
-      <div className="container px-2 my-5">
+      <div className="container px-2 my-3 flex-fill">
         <form id="url-form" onSubmit={handleSubmit} data-testid="url-form">
           <input
             type="url"
@@ -104,8 +104,8 @@ function Home({
         )}
       </div>
 
-      <div className="text-center">
-        <div className="h2 bottom-text">
+      <div className="text-center mb-4">
+        <div className="h2 bottom-text ">
           read more about the <Link to="/about"> project</Link>.
         </div>
       </div>

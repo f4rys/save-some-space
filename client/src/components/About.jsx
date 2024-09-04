@@ -132,6 +132,7 @@ function About() {
             </li>
           </ul>
           <p></p>
+          <div className="empty-banner"></div>
         </OverlayScrollbarsComponent>
       </div>
     </>

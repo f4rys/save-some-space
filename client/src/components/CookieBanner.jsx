@@ -19,27 +19,26 @@ function CookieBanner({ onAccept }) {
 
   return (
     showBanner && (
-      <div
-        id="cookie-banner"
-        className="cookie-banner d-flex justify-content-center"
-      >
-        <div className="d-flex align-items-center mx-2">
+      <div id="cookie-banner" className="cookie-banner">
+        <div className="cookie-text d-flex align-items-center mx-2">
           This website uses cookies, which are essential for the functionality
           of the service.
         </div>
-        <div className="d-flex align-items-center mx-2">
-          <Link to="/privacy-policy">Privacy Policy</Link>
-          <div className="mx-2">|</div>
-          <Link to="/terms-of-service">Terms of Service</Link>
-        </div>
-        <div className="d-flex align-items-center mx-2">
-          <button
-            className="btn btn-primary"
-            id="accept-cookies"
-            onClick={handleAccept}
-          >
-            Accept
-          </button>
+        <div className="cookie-links-and-button d-flex align-items-center mx-2">
+          <div className="cookie-links d-flex align-items-center mx-2">
+            <Link to="/privacy-policy">Privacy Policy</Link>
+            <div className="mx-2">|</div>
+            <Link to="/terms-of-service">Terms of Service</Link>
+          </div>
+          <div className="cookie-button d-flex align-items-center mx-2">
+            <button
+              className="btn btn-primary"
+              id="accept-cookies"
+              onClick={handleAccept}
+            >
+              Accept
+            </button>
+          </div>
         </div>
       </div>
     )
