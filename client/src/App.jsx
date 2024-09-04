@@ -1,21 +1,22 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import { LogoProvider } from "./components/LogoContext";
 import Home from "./components/Home.jsx";
 import TermsOfService from "./components/TermsOfService.jsx";
 import PrivacyPolicy from "./components/PrivacyPolicy.jsx";
 import About from "./components/About.jsx";
 import CatchAll from "./components/CatchAll.jsx";
-import { Routes, Route, useLocation } from "react-router-dom";
 import CookieBanner from "./components/CookieBanner";
-import { useState, useRef } from "react";
 import Logo from "./components/Logo";
-import { Link } from "react-router-dom";
-import { LogoProvider } from "./components/LogoContext";
 
 function App() {
   const [cookiesAccepted, setCookiesAccepted] = useState(
     localStorage.getItem("cookiesAccepted") === "true"
   );
   const [shortenedUrl, setShortenedUrl] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const fullUrlInputRef = useRef(null);
   const [showCookieMessage, setShowCookieMessage] = useState(false);
 
@@ -25,10 +26,10 @@ function App() {
   const handleLogoClick = () => {
     setShortenedUrl("");
     setShowCookieMessage(false);
+    setErrorMessage("");
     if (fullUrlInputRef.current) {
       fullUrlInputRef.current.value = "";
     }
-      
   };
 
   return (
@@ -51,6 +52,8 @@ function App() {
                   shortenedUrl={shortenedUrl}
                   showCookieMessage={showCookieMessage}
                   setShowCookieMessage={setShowCookieMessage}
+                  errorMessage={errorMessage}
+                  setErrorMessage={setErrorMessage}
                 />
               }
             />

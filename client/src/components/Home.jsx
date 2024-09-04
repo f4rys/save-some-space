@@ -10,6 +10,8 @@ function Home({
   shortenedUrl,
   showCookieMessage,
   setShowCookieMessage,
+  errorMessage,
+  setErrorMessage,
 }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,6 +22,7 @@ function Home({
     }
 
     setShowCookieMessage(false);
+    setErrorMessage("");
 
     const fullUrl = event.target.fullUrl.value;
 
@@ -30,6 +33,7 @@ function Home({
       setShortenedUrl(response.data.shortUrl);
     } catch (error) {
       console.error("Error shortening URL:", error);
+      setErrorMessage("Failed to shorten the URL. Please try again.");
     }
   };
 
@@ -96,6 +100,12 @@ function Home({
           </div>
         )}
 
+        {errorMessage && (
+          <div className="text-danger mb-2 mt-5 text-center h4">
+            {errorMessage}
+          </div>
+        )}
+
         {showCookieMessage && (
           <div className="text-body-tertiary mb-2 mt-5 text-center h4">
             accept cookies to use the service.
@@ -119,6 +129,8 @@ Home.propTypes = {
   shortenedUrl: PropTypes.string,
   showCookieMessage: PropTypes.bool.isRequired,
   setShowCookieMessage: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string,
+  setErrorMessage: PropTypes.func.isRequired,
 };
 
 export default Home;
