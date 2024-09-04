@@ -11,7 +11,6 @@ function Home({
   showCookieMessage,
   setShowCookieMessage,
 }) {
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 

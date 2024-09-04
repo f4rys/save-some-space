@@ -6,7 +6,7 @@ const session = require("express-session");
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
-const shortId = require("shortid"); // Import shortId
+const shortId = require("shortid");
 
 const app = express();
 require("dotenv").config({ path: path.join(__dirname, "../.env") });
