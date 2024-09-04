@@ -29,11 +29,12 @@ const limiter = rateLimit({
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.NODE_ENV === "production" ? "https://www.savesome.space" : "http://localhost:5173",
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
 app.use(limiter);
 app.use(express.json());
 app.use(
@@ -94,13 +95,15 @@ app.get("/:shortUrl", async (req, res) => {
     require_protocol: true,
   })
     ? shortUrl.full
-    : "http://localhost:5173/";
+    : "https://savesome.space";
 
   res.json({ url: sanitizedUrl });
 });
 
-app.listen(8080, () => {
-  console.log("Server started on port 8080");
+const port = process.env.PORT || 8080;
+
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
 });
 
 module.exports = app;

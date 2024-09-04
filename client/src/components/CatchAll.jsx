@@ -10,11 +10,12 @@ function CatchAll() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [redirecting, setRedirecting] = useState(false);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchFullUrl = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/${shortUrl}`);
+        const response = await axios.get(`${apiUrl}/${shortUrl}`);
         setRedirecting(true);
         window.location.href = response.data.url;
       } catch (error) {
@@ -26,7 +27,7 @@ function CatchAll() {
     };
 
     fetchFullUrl();
-  }, [shortUrl, navigate]);
+  }, [shortUrl, navigate, apiUrl]);
 
   if (!loading && error && !redirecting) {
     return <NotFound />;

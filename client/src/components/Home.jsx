@@ -13,6 +13,8 @@ function Home({
   errorMessage,
   setErrorMessage,
 }) {
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -27,7 +29,8 @@ function Home({
     const fullUrl = event.target.fullUrl.value;
 
     try {
-      const response = await axios.post("http://localhost:8080/shortUrls", {
+      console.log(apiUrl);
+      const response = await axios.post(`${apiUrl}/shortUrls`, {
         fullUrl: fullUrl,
       });
       setShortenedUrl(response.data.shortUrl);
