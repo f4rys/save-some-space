@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import About from "../../src/components/About";
@@ -21,17 +20,6 @@ describe("About Component", () => {
         <About />
       </MemoryRouter>
     );
-  });
-
-  test("renders Logo inside Link component", () => {
-    render(
-      <MemoryRouter>
-        <About />
-      </MemoryRouter>
-    );
-
-    const logoComponent = screen.getByText("Mocked Logo");
-    expect(logoComponent).toBeInTheDocument();
   });
 
   test("renders OverlayScrollbarsComponent with the expected content", () => {

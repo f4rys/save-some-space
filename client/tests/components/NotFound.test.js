@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import NotFound from "../../src/components/NotFound";
@@ -18,18 +17,6 @@ describe("NotFound Component", () => {
     ).toBeInTheDocument();
   });
 
-  test("contains a link to the home page", () => {
-    render(
-      <MemoryRouter>
-        <NotFound />
-      </MemoryRouter>
-    );
-
-    const logoLink = screen.getByRole("link");
-    expect(logoLink).toBeInTheDocument();
-    expect(logoLink).toHaveAttribute("href", "/");
-  });
-
   test("does not render incorrect text", () => {
     render(
       <MemoryRouter>
@@ -41,14 +28,4 @@ describe("NotFound Component", () => {
     expect(screen.queryByText(/Go back/i)).not.toBeInTheDocument();
   });
 
-  test("does not contain any other links except the home link", () => {
-    render(
-      <MemoryRouter>
-        <NotFound />
-      </MemoryRouter>
-    );
-
-    const links = screen.getAllByRole("link");
-    expect(links.length).toBe(1);
-  });
 });

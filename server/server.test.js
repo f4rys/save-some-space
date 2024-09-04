@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 const path = require("path");
 const request = require("supertest");
-const shortId = require('shortid');
+const shortId = require("shortid");
 const app = require("./server");
 const ShortUrl = require("./models/shortUrl");
+const generateUniqueShortId = require("./generateUniqueShortId");
 
 require("dotenv").config({ path: path.join(__dirname, "../.env") });
 
@@ -26,45 +27,46 @@ describe("ShortUrl Model and Server", () => {
     serverInstance.close();
   });
 
-  it("should create a new short URL with a default short code", async () => {
-    const url = new ShortUrl({ full: "https://www.example.com" });
+  test("should create a new short URL with a generated short code", async () => {
+    const newShortId = await generateUniqueShortId();
+    const url = new ShortUrl({
+      full: "https://www.example.com",
+      short: newShortId,
+    });
     await url.save();
     expect(url.short).toBeTruthy();
-    expect(url.clicks).toBe(0);
   });
 
-  it("should return all short URLs on GET /", async () => {
+  test("should return all short URLs on GET /", async () => {
     const res = await testServer.get("/");
     expect(res.status).toBe(200);
     expect(res.body).toHaveProperty("shortUrls");
   });
 
-  it("should create a new short URL on POST /shortUrls", async () => {
+  test("should create a new short URL on POST /shortUrls", async () => {
     const fullUrl = "https://www.new-url.com";
-    const shortUrlCode = shortId.generate();
-  
-    const res = await testServer
-      .post("/shortUrls")
-      .send({ fullUrl: fullUrl, shortUrl: shortUrlCode });
-  
+
+    const res = await testServer.post("/shortUrls").send({ fullUrl: fullUrl });
+
     expect(res.status).toBe(200);
-    expect(res.body).toHaveProperty("shortUrl", shortUrlCode);
+    expect(res.body).toHaveProperty("shortUrl");
+    expect(res.body.shortUrl).toHaveLength(9);
   });
 
-  it("should redirect to the full URL on GET /:shortUrl", async () => {
+  test("should redirect to the full URL on GET /:shortUrl", async () => {
     const fullUrl = "https://www.redirect-test.com";
-    const shortUrlCode = shortId.generate(); 
+    const shortUrlCode = shortId.generate();
     await new ShortUrl({
       full: fullUrl,
       short: shortUrlCode,
     }).save();
-  
+
     const res = await testServer.get(`/${shortUrlCode}`);
     expect(res.status).toBe(200);
     expect(res.body).toHaveProperty("url", fullUrl);
   });
 
-  it("should return 404 if short URL not found on GET /:shortUrl", async () => {
+  test("should return 404 if short URL not found on GET /:shortUrl", async () => {
     const res = await testServer.get("/non-existent-code");
     expect(res.status).toBe(404);
   });

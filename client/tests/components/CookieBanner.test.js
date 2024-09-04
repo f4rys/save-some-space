@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import CookieBanner from "../../src/components/CookieBanner";
 import { MemoryRouter } from "react-router-dom";

@@ -1,28 +1,60 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { createRef } from "react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import Home from "../../src/components/Home";
+import { MemoryRouter } from "react-router-dom";
 
 jest.mock("axios");
 
-describe("Home component", () => {
+describe("Home Component", () => {
+  let setShortenedUrlMock;
+  let setShowCookieMessageMock;
+  let fullUrlInputRefMock;
+
   beforeEach(() => {
-    jest.clearAllMocks();
+    setShortenedUrlMock = jest.fn();
+    setShowCookieMessageMock = jest.fn();
+    fullUrlInputRefMock = createRef();
   });
 
-  test("renders the basic elements", () => {
-    render(<Home cookiesAccepted={true} />, { wrapper: MemoryRouter });
+  test("should display the cookie acceptance message if cookies are not accepted", () => {
+    render(
+      <MemoryRouter>
+        <Home
+          cookiesAccepted={false}
+          fullUrlInputRef={fullUrlInputRefMock}
+          setShortenedUrl={setShortenedUrlMock}
+          shortenedUrl=""
+          showCookieMessage={false}
+          setShowCookieMessage={setShowCookieMessageMock}
+        />
+      </MemoryRouter>
+    );
 
-    expect(screen.getByText("save some space.")).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("example.com")).toBeInTheDocument();
-    expect(screen.getByText("shorten link")).toBeInTheDocument();
+    const form = screen.getByTestId("url-form");
+    fireEvent.submit(form);
+
+    expect(setShowCookieMessageMock).toHaveBeenCalledWith(true);
+    expect(setShortenedUrlMock).not.toHaveBeenCalled();
   });
 
-  test("shows cookie message when cookies are not accepted", () => {
-    render(<Home cookiesAccepted={false} />, { wrapper: MemoryRouter });
+  test("should display the shortened URL when it is provided", () => {
+    const shortenedUrl = "short123";
 
-    fireEvent.submit(screen.getByTestId("url-form"));
+    render(
+      <MemoryRouter>
+        <Home
+          cookiesAccepted={true}
+          fullUrlInputRef={fullUrlInputRefMock}
+          setShortenedUrl={setShortenedUrlMock}
+          shortenedUrl={shortenedUrl}
+          showCookieMessage={false}
+          setShowCookieMessage={setShowCookieMessageMock}
+        />
+      </MemoryRouter>
+    );
+
     expect(
-      screen.getByText("accept cookies to use the service.")
+      screen.getByText(`savesome.space/${shortenedUrl}`)
     ).toBeInTheDocument();
   });
 });
