@@ -1,0 +1,290 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600&display=swap");
+
+/* Animations */
+
+@keyframes animatedBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* General */
+
+body {
+  font-family: "Raleway", sans-serif !important;
+  font-weight: 300 !important;
+}
+
+.background-image {
+  width: 100%;
+  height: 100%;
+  background-image: url("assets/background_image.webp");
+  background-position: 0px 0px;
+  background-repeat: repeat-x;
+  position: fixed;
+  animation: animatedBackground 120s linear infinite alternate;
+}
+
+.container-full-height {
+  background-color: rgba(255, 255, 255, 1);
+  height: 80vh;
+  width: 80vw;
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  left: 10%;
+  right: 10%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 0px 18px -2px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 0px 0px 18px -2px rgba(0, 0, 0, 1);
+  box-shadow: 0px 0px 18px -2px rgba(0, 0, 0, 1);
+}
+
+.logo-header {
+  margin-top: 6vh;
+  font-weight: 300 !important;
+}
+
+.header h1 {
+  font-size: 5vw;
+}
+
+.header2 {
+  padding-bottom: 2vh;
+  margin-top: 6vh;
+  font-weight: 300 !important;
+}
+
+.header2 h1 {
+  font-size: 3vw;
+}
+
+.container {
+  height: 20vh;
+}
+
+.container-big {
+  height: 100%;
+  width: 80%;
+  font-weight: 500 !important;
+}
+
+/* Logo */
+
+.image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-image:hover {
+  cursor: pointer;
+}
+
+.top-image {
+  position: absolute;
+  width: 9vh;
+}
+
+.bottom-image {
+  width: 9vh;
+}
+
+.bottom-image {
+  animation: spin 30s linear infinite;
+}
+
+/* Home */
+
+.shortened-url-display {
+  display: grid;
+  justify-content: center;
+}
+
+.shortened-url:hover,
+.shortened-url-button:hover {
+  transform: scale(1.07) !important;
+}
+
+.bottom-text {
+  font-size: 2vh !important;
+  font-weight: 500 !important;
+}
+
+/* Cookie banner */
+
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  z-index: 1000;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cookie-banner a {
+  color: lightblue;
+}
+
+.empty-banner {
+  height: 5vh;
+}
+
+/* Scrollables */
+
+.scrollable-content {
+  max-height: 200%;
+  padding-left: 6vw;
+  padding-right: 6vw;
+  word-break: break-word !important;
+}
+
+.scrollable-text-container {
+  border-top: 1px solid #e2e2e2;
+  height: 26%;
+}
+
+.scrollable-text-container h2 {
+  text-align: center;
+  margin-top: 4%;
+  margin-bottom: 3%;
+}
+
+.scrollable-text-container p,
+ul {
+  line-height: 1.6;
+}
+
+.scrollable-text-container ul {
+  list-style: disc;
+}
+
+.os-scrollbar {
+  --os-size: 6px;
+  --os-padding-axis: 4vh;
+  --os-handle-border-radius: 10px;
+  --os-handle-bg: #e2e2e2;
+  --os-handle-bg-hover: #cccccc;
+  --os-handle-bg-active: #cccccc;
+  --os-handle-min-size: 20%;
+  --os-handle-max-size: 20%;
+}
+
+/* Buttons */
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:visited {
+  background-color: #529ab1 !important;
+  transition: 0.7s;
+  border: none !important;
+}
+
+.btn:hover {
+  transform: scale(1.01);
+}
+
+.btn-primary:hover {
+  background-color: #3b6d7e !important;
+  transition: 0.7s;
+}
+
+/* Links */
+
+a {
+  color: #529ab1 !important;
+}
+
+a:hover,
+a:active,
+a:visited,
+a:link {
+  text-decoration: none;
+}
+
+/* Smaller screens */
+@media (max-width: 1080px) {
+  .container-full-height {
+    height: 80vh;
+  }
+
+  .shortened-url-display {
+    font-size: 100% !important;
+  }
+
+  .header h1 {
+    font-size: 12vw;
+  }
+
+  .scrollable-text-container {
+    height: 30% !important;
+  }
+
+  .scrollable-text-container h2 {
+    margin-top: 10% !important;
+    margin-bottom: 10% !important;
+  }
+
+  .scrollable-content {
+    padding-left: 4vw !important;
+    padding-right: 4vw !important;
+    text-align: center !important;
+  }
+
+  .container-big {
+    width: 85% !important;
+  }
+
+  ul {
+    text-align: center;
+    list-style-position: inside !important;
+    padding-left: 0 !important;
+  }
+  ul li {
+    margin-bottom: 1.5vh !important;
+  }
+
+  .cookie-banner {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cookie-banner > .cookie-text {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .cookie-banner > .cookie-links-and-button {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cookie-banner > .cookie-links-and-button > div {
+    margin: 0 0;
+  }
+}
