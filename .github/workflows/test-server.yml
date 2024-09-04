@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MONGODB: ${{ secrets.MONGODB }} 
+      SERVER_SECRET: 1234
+      NODE_ENV: test
     defaults:
       run:
         working-directory: 'server'
