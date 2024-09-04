@@ -6,7 +6,7 @@ const session = require("express-session");
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
-const shortId = require("shortid");
+const generateUniqueShortId = require('./generateUniqueShortId');
 
 const app = express();
 require("dotenv").config({ path: path.join(__dirname, "../.env") });
@@ -58,21 +58,6 @@ app.get("/", async (req, res) => {
   const shortUrls = await ShortUrl.find();
   res.json({ shortUrls: shortUrls });
 });
-
-async function generateUniqueShortId() {
-  let unique = false;
-  let newShortId;
-
-  while (!unique) {
-    newShortId = shortId.generate();
-    const existingShortUrl = await ShortUrl.findOne({ short: newShortId }).exec();
-    if (!existingShortUrl) {
-      unique = true;
-    }
-  }
-
-  return newShortId;
-}
 
 app.post("/shortUrls", async (req, res) => {
   try {
