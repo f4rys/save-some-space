@@ -4,9 +4,9 @@
   "description": "URL Shortener backend built with Express.js and MongoDB Atlas",
   "main": "server.js",
   "scripts": {
-    "test": "jest --detectOpenHandles --forceExit",
-    "start": "node server",
-    "dev": "nodemon server"
+    "dev": "nodemon server",
+    "prod:start": "pm2-runtime server.js",
+    "test": "jest --detectOpenHandles --forceExit"
   },
   "keywords": [
     "url",
