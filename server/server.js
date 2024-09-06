@@ -27,14 +27,8 @@ const limiter = rateLimit({
   legacyHeaders: false,
 });
 
-app.use(
-  cors({
-    origin: process.env.NODE_ENV === "production" ? "https://www.savesome.space" : "http://localhost:5173",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
-
+app.use(cors());
+app.options('*', cors());
 app.use(limiter);
 app.use(express.json());
 app.use(
@@ -100,9 +94,7 @@ app.get("/:shortUrl", async (req, res) => {
   res.json({ url: sanitizedUrl });
 });
 
-const port = process.env.PORT || 8080;
-
-app.listen(port, () => {
+app.listen(8080, () => {
   console.log(`Server started on port ${port}`);
 });
 
