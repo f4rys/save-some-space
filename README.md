@@ -1,6 +1,6 @@
-<div align="center" style="display: flex; justify-content: center; align-items: center; margin-bottom: 50px; margin-top: 40px">
-<img style="position: absolute" src="./media/logo_back.gif" width="100px" />
-<img style="position: absolute" src="./media/logo_front.png" width="60px" />
+<div style="display: flex; justify-content: center; align-items: center; margin-bottom: 50px; margin-top: 40px">
+<img style="position: absolute" src="./media/logo.gif" width="100px" />
+
 </div>
 
 <div align="center">
