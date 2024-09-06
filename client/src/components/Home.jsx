@@ -29,7 +29,6 @@ function Home({
     const fullUrl = event.target.fullUrl.value;
 
     try {
-      console.log(apiUrl);
       const response = await axios.post(`${apiUrl}/shortUrls`, {
         fullUrl: fullUrl,
       });
