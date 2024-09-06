@@ -1,0 +1,61 @@
+name: Deploy to AWS EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH Key
+        run: |
+          echo "${{ secrets.EC2_KEY }}" | base64 --decode > ec2_key.pem
+          chmod 600 ec2_key.pem
+
+      - name: Deploy
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ec2_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+
+            export NVM_DIR="/home/${{ secrets.EC2_USER }}/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion      
+
+            sudo chown -R ${{ secrets.EC2_USER }}: /home/${{ secrets.EC2_USER }}/Save-some-space/client || exit 1
+            sudo chmod -R u+rwX /home/${{ secrets.EC2_USER }}/Save-some-space/client || exit 1
+
+            sudo chown -R ${{ secrets.EC2_USER }}: /home/${{ secrets.EC2_USER }}/Save-some-space/server || exit 1
+            sudo chmod -R u+rwX /home/${{ secrets.EC2_USER }}/Save-some-space/server || exit 1
+
+            cd /home/${{ secrets.EC2_USER }} || exit 1
+            cd Save-some-space || exit 1
+            git pull origin main || exit 1
+            cd /home/${{ secrets.EC2_USER }}/Save-some-space/client || exit 1
+
+            echo "Installing client dependencies"
+            npm install || exit 1
+
+            echo "Building the client"
+            npm run build || exit 1
+
+            echo "Removing old build from /var/www/html"
+            sudo rm -rf /var/www/html/* || exit 1
+
+            echo "Copying new build to /var/www/html"
+            sudo cp -r /home/${{ secrets.EC2_USER }}/Save-some-space/client/dist/* /var/www/html/ || exit 1
+
+            cd /home/${{ secrets.EC2_USER }}/Save-some-space/server || exit 1
+
+            echo "Installing server dependencies"
+            npm install || exit 1
+
+            echo "Stopping existing pm2 services"
+            pm2 stop all || true
+
+            echo "Starting the server"
+            pm2 start server.js || exit 1
+          EOF
