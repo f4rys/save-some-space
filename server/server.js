@@ -6,7 +6,7 @@ const session = require("express-session");
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
-const generateUniqueShortId = require('./generateUniqueShortId');
+const generateUniqueShortId = require("./generateUniqueShortId");
 
 const app = express();
 require("dotenv").config({ path: path.join(__dirname, "../.env") });
@@ -27,8 +27,17 @@ const limiter = rateLimit({
   legacyHeaders: false,
 });
 
-app.use(cors());
-app.options('*', cors());
+const corsOptions = {
+  origin:
+    process.env.NODE_ENV === "production"
+      ? "https://savesome.space"
+      : "http://localhost:5173",
+  optionsSuccessStatus: 200,
+  methods: ["GET", "POST"],
+  allowedHeaders: ["content-type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
 app.use(limiter);
 app.use(express.json());
 app.use(
@@ -94,7 +103,9 @@ app.get("/:shortUrl", async (req, res) => {
   res.json({ url: sanitizedUrl });
 });
 
-app.listen(8080, () => {
+const port = process.env.PORT || 8080;
+
+app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
 
