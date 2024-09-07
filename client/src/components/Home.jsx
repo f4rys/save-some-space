@@ -57,7 +57,7 @@ function Home({
         <h1 className="display-4 title">save some space.</h1>
       </div>
 
-      <div className="container px-2 my-3 flex-fill">
+      <div className="px-2 my-3 flex-fill">
         <form id="url-form" onSubmit={handleSubmit} data-testid="url-form">
           <input
             type="url"
@@ -81,7 +81,7 @@ function Home({
 
         {shortenedUrl && (
           <div
-            className="text-center h4 shortened-url-display"
+            className="text-center h4"
             id="shortenedUrlDisplay"
           >
             <div id="shortenedUrl" className="mb-2 mt-4 shortened-url">

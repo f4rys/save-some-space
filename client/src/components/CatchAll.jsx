@@ -39,7 +39,7 @@ function CatchAll() {
         <h1 className="display-4 title">save some space.</h1>
       </div>
 
-      <div className="container px-2 my-4">
+      <div className="px-2 my-4">
         <div className="text-center display-4 my-2">Redirecting...</div>
       </div>
     </>

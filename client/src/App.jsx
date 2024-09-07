@@ -36,7 +36,7 @@ function App() {
     <>
       <LogoProvider handleLogoClick={isHome ? handleLogoClick : null}>
         <div className="container-big d-flex flex-column">
-          <div className="text-center pt-3 logo-header">
+          <div className="text-center pt-3">
             <Link to="/">
               <Logo />
             </Link>
