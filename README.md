@@ -1,9 +1,9 @@
-<div align="center" style="display: flex; justify-content: center; align-items: center;">
-<img style="position: absolute" src="./media/logo.gif" width="150px" />
-
-</div>
-
 <div align="center">
+
+<br><br>
+<img style="position: absolute;" src="./client/public/og-image.png" width="500px" />
+<br><br><br>
+
 <h1>save some space.</h1>
 
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
@@ -29,7 +29,7 @@ _save some space._ is a minimalist URL shortening service built with: Vite, Reac
 - Redirection: Seamlessly redirect users from shortened links to their original destinations.
 - Scalable Storage: Utilizes MongoDB Atlas for reliable and scalable data storage in the cloud.
 - Dynamic reloading: Implemented to prevent whole front-end from being reloaded on every change.
-- Privacy policy and terms of service: Implemented to ensure the privacy and user experience of the service is as intended.
+- Privacy policy and terms of service: Implemented to ensure the privacy and user experience of the service is as intend
 
 </br>
 
@@ -75,6 +75,9 @@ _save some space._ is a minimalist URL shortening service built with: Vite, Reac
    ```bash
    http://localhost:5173/
    ```
+
+<div align="center" style="display: flex; justify-content: center; align-items: center;">
+<img style="position: absolute" src="./media/logo.gif" width="150px" /></div>
 
 ## Credits
 
