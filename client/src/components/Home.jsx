@@ -53,11 +53,11 @@ function Home({
 
   return (
     <>
-      <div className="text-center pb-3 header">
+      <div className="text-center header">
         <h1 className="display-4 title">save some space.</h1>
       </div>
 
-      <div className="px-2 my-3 flex-fill">
+      <div className="flex-fill">
         <form id="url-form" onSubmit={handleSubmit} data-testid="url-form">
           <input
             type="url"

@@ -35,19 +35,17 @@ body {
   animation: animatedBackground 120s linear infinite alternate;
 }
 
-.container-full-height {
+.container-full-height{
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+.container-white{
   background-color: rgba(255, 255, 255, 1);
-  height: 80vh;
-  width: 80vw;
+  height: 85%;
+  width: 85%;
   position: absolute;
-  top: 10%;
-  bottom: 10%;
-  left: 10%;
-  right: 10%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   border-radius: 20px;
   -webkit-box-shadow: 0px 0px 18px -2px rgba(0, 0, 0, 1);
   -moz-box-shadow: 0px 0px 18px -2px rgba(0, 0, 0, 1);
@@ -55,7 +53,8 @@ body {
 }
 
 .header h1 {
-  font-size: 5vw;
+  font-size: calc(2.5vh + 3.5vw);
+  margin-bottom: 4vh;
 }
 
 .container-big {
@@ -69,11 +68,13 @@ body {
 .image-container {
   display: flex;
   justify-content: center;
+  margin-bottom: 2vh;
+  margin-top: calc(2vh + 1vw);
 }
 
 .top-image {
   position: absolute;
-  width: 9vh;
+  width: calc(7.5vh + 1.5vw);
 }
 
 .top-image:hover {
@@ -81,7 +82,7 @@ body {
 }
 
 .bottom-image {
-  width: 9vh;
+  width: calc(7.5vh + 1.5vw);
   animation: spin 30s linear infinite;
 }
 
@@ -93,7 +94,7 @@ body {
 }
 
 .bottom-text {
-  font-size: 2vh !important;
+  font-size: calc(85% + 0.5vw) !important;
 }
 
 /* Cookie banner */
@@ -178,13 +179,6 @@ a:link {
 
 /* Smaller screens */
 @media (max-width: 1080px) {
-  .container-full-height {
-    height: 80vh;
-  }
-
-  .header h1 {
-    font-size: 12vw;
-  }
 
   .scrollable-text-container {
     height: 30% !important;

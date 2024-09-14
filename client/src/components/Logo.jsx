@@ -7,7 +7,7 @@ function Logo() {
 
   return (
     <div
-      className="image-container mb-3 mt-5"
+      className="image-container"
       onClick={handleClick}
       style={{ cursor: handleClick ? "pointer" : "default" }}
     >
