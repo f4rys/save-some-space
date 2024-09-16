@@ -17,13 +17,28 @@ function Home({
   setShowCookieMessage,
   errorMessage,
   setErrorMessage,
+  expireAfterEnabled,
+  setExpireAfterEnabled,
+  customUrl,
+  setCustomUrl,
+  qrEnabled,
+  setQrEnabled,
+  expirationDays,
+  setExpirationDays,
 }) {
   const apiUrl = import.meta.env.VITE_API_URL;
   const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
-  const [expireAfterEnabled, setExpireAfterEnabled] = useState(false);
 
   const handleExpireAfterToggle = () => {
     setExpireAfterEnabled(!expireAfterEnabled);
+  };
+
+  const handleQrToggle = () => {
+    setQrEnabled(!qrEnabled);
+  };
+
+  const handleExpirationDaysChange = (event) => {
+    setExpirationDays(event.target.value);
   };
 
   const handleSubmit = async (event) => {
@@ -46,7 +61,7 @@ function Home({
       setShortenedUrl(response.data.shortUrl);
     } catch (error) {
       console.error("Error shortening URL:", error);
-      setErrorMessage("Failed to shorten the URL. Please try again.");
+      setErrorMessage("failed to shorten the URL. please try again.");
     }
   };
 
@@ -100,7 +115,12 @@ function Home({
                 <img src={qrIcon} alt="QR Code" className="settings-icon"></img>
                 <label className="mx-2">QR code</label>
                 <div className="form-switch">
-                  <input className="form-check-input mx-1" type="checkbox" />
+                  <input
+                    className="form-check-input mx-1"
+                    type="checkbox"
+                    checked={qrEnabled}
+                    onChange={handleQrToggle}
+                  />
                 </div>
               </div>
               <div className="vertical-line"></div>
@@ -117,6 +137,8 @@ function Home({
                     placeholder="days"
                     min="1"
                     disabled={expireAfterEnabled}
+                    value={expirationDays}
+                    onChange={handleExpirationDaysChange}
                   />
                 </div>
                 <div className="form-switch d-flex expiry-container">
@@ -137,6 +159,8 @@ function Home({
                   type="text"
                   className="form-control advanced-settings-input custom-url-form"
                   placeholder="custom-url"
+                  value={customUrl}
+                  onChange={(e) => setCustomUrl(e.target.value)}
                 />
               </div>
             </div>
@@ -204,6 +228,14 @@ Home.propTypes = {
   setShowCookieMessage: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
   setErrorMessage: PropTypes.func.isRequired,
+  expireAfterEnabled: PropTypes.bool.isRequired,
+  setExpireAfterEnabled: PropTypes.func.isRequired,
+  customUrl: PropTypes.string.isRequired,
+  setCustomUrl: PropTypes.func.isRequired,
+  qrEnabled: PropTypes.bool.isRequired,
+  setQrEnabled: PropTypes.func.isRequired,
+  expirationDays: PropTypes.string.isRequired,
+  setExpirationDays: PropTypes.func.isRequired,
 };
 
 export default Home;

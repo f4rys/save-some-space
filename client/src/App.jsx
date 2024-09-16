@@ -19,6 +19,10 @@ function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const fullUrlInputRef = useRef(null);
   const [showCookieMessage, setShowCookieMessage] = useState(false);
+  const [expireAfterEnabled, setExpireAfterEnabled] = useState(false);
+  const [customUrl, setCustomUrl] = useState("");
+  const [qrEnabled, setQrEnabled] = useState(false);
+  const [expirationDays, setExpirationDays] = useState("");
 
   const location = useLocation();
   const isHome = location.pathname === "/";
@@ -27,6 +31,11 @@ function App() {
     setShortenedUrl("");
     setShowCookieMessage(false);
     setErrorMessage("");
+    setExpireAfterEnabled(false);
+    setExpirationDays("");
+    setCustomUrl("");
+    setQrEnabled(false);
+
     if (fullUrlInputRef.current) {
       fullUrlInputRef.current.value = "";
     }
@@ -54,6 +63,14 @@ function App() {
                   setShowCookieMessage={setShowCookieMessage}
                   errorMessage={errorMessage}
                   setErrorMessage={setErrorMessage}
+                  expireAfterEnabled={expireAfterEnabled}
+                  setExpireAfterEnabled={setExpireAfterEnabled}
+                  customUrl={customUrl}
+                  setCustomUrl={setCustomUrl}
+                  qrEnabled={qrEnabled}
+                  setQrEnabled={setQrEnabled}
+                  expirationDays={expirationDays}
+                  setExpirationDays={setExpirationDays}
                 />
               }
             />
