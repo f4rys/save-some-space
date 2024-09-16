@@ -107,7 +107,7 @@ body {
   margin-left: 0rem!important;
   margin-right: 0.5rem!important;
   display: flex;
-  align-self: baseline;
+  align-self: center;
 }
 
 .custom-url-form{
@@ -116,6 +116,8 @@ body {
 
 .form-switch{
   padding-left: 0;
+  display: flex;
+  align-self: center;
 }
 
 .form-control:focus {
@@ -146,10 +148,6 @@ body {
 .btn-outline-secondary:hover{
   border-color: var(--bs-border-color);
   background-color: #4f9aac;
-}
-
-.gear-icon{
-  width: 1.5rem;
 }
 
 .settings-icon{
