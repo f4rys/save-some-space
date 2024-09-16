@@ -2,6 +2,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import PropTypes from "prop-types";
+import { useState } from "react";
+import gearIcon from "../assets/gear.png";
+import qrIcon from "../assets/qr.png";
+import clockIcon from "../assets/clock.png";
+import fileIcon from "../assets/file.png";
 
 function Home({
   cookiesAccepted,
@@ -14,6 +19,12 @@ function Home({
   setErrorMessage,
 }) {
   const apiUrl = import.meta.env.VITE_API_URL;
+  const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
+  const [expireAfterEnabled, setExpireAfterEnabled] = useState(false);
+
+  const handleExpireAfterToggle = () => {
+    setExpireAfterEnabled(!expireAfterEnabled);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,6 +62,10 @@ function Home({
     }
   };
 
+  const toggleAdvancedOptions = () => {
+    setShowAdvancedOptions(!showAdvancedOptions);
+  };
+
   return (
     <>
       <div className="text-center header">
@@ -59,15 +74,74 @@ function Home({
 
       <div className="flex-fill">
         <form id="url-form" onSubmit={handleSubmit} data-testid="url-form">
-          <input
-            type="url"
-            className="form-control mb-3"
-            id="fullUrl"
-            name="fullUrl"
-            placeholder="example.com"
-            required
-            ref={fullUrlInputRef}
-          ></input>
+          <div className="input-group mb-3">
+            <input
+              type="url"
+              className="form-control"
+              id="fullUrl"
+              name="fullUrl"
+              placeholder="example.com"
+              required
+              ref={fullUrlInputRef}
+            />
+            <button
+              className="btn btn-outline-secondary"
+              type="button"
+              id="advancedOptionsButton"
+              onClick={toggleAdvancedOptions}
+            >
+              <img src={gearIcon} alt="Settings" className="gear-icon"></img>
+            </button>
+          </div>
+
+          {showAdvancedOptions && (
+            <div className="advanced-options d-flex mb-3">
+              <div className="d-flex align-items-center">
+                <img src={qrIcon} alt="QR Code" className="settings-icon"></img>
+                <label className="mx-2">QR code</label>
+                <div className="form-switch">
+                  <input className="form-check-input mx-1" type="checkbox" />
+                </div>
+              </div>
+              <div className="vertical-line"></div>
+              <div className="expiry d-flex align-items-start">
+                <div className="d-flex align-items-center">
+                  <img
+                    src={clockIcon}
+                    alt="Clock"
+                    className="settings-icon"
+                  ></img>
+                  <label className="mx-2">expires in:</label>
+                  <input
+                    className="form-control advanced-settings-input expire-form"
+                    placeholder="days"
+                    min="1"
+                    disabled={expireAfterEnabled}
+                  />
+                </div>
+                <div className="form-switch d-flex expiry-container">
+                  <input
+                    className="form-check-input expiry-switch"
+                    type="checkbox"
+                    checked={expireAfterEnabled}
+                    onChange={handleExpireAfterToggle}
+                  />
+                  <label className="form-check-label">never</label>
+                </div>
+              </div>
+              <div className="vertical-line"></div>
+              <div className="d-flex align-items-center">
+                <img src={fileIcon} alt="File" className="settings-icon"></img>
+                <label className="mx-1 text-blue">savesome.space/</label>
+                <input
+                  type="text"
+                  className="form-control advanced-settings-input custom-url-form"
+                  placeholder="custom-url"
+                />
+              </div>
+            </div>
+          )}
+
           <div className="d-grid">
             <button
               className="btn btn-primary btn-lg"
@@ -80,10 +154,7 @@ function Home({
         </form>
 
         {shortenedUrl && (
-          <div
-            className="text-center h4"
-            id="shortenedUrlDisplay"
-          >
+          <div className="text-center h4" id="shortenedUrlDisplay">
             <div id="shortenedUrl" className="mb-2 mt-4 shortened-url">
               <a
                 href={`/${shortenedUrl}`}

@@ -97,6 +97,92 @@ body {
   font-size: calc(85% + 0.5vw) !important;
 }
 
+/* Shortening settings */
+
+.expire-form{
+  width: 4rem;
+}
+
+.expiry-switch{
+  margin-left: 0rem!important;
+  margin-right: 0.5rem!important;
+  display: flex;
+  align-self: baseline;
+}
+
+.custom-url-form{
+  width: calc(2rem + 8vw);
+}
+
+.form-switch{
+  padding-left: 0;
+}
+
+.form-control:focus {
+  border-color: #4f9aac;
+  box-shadow: #81b1bb;
+}
+
+.form-switch .form-check-input:focus {
+  border-color: rgba(0, 0, 0, 0.25);
+  outline: 0;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.form-switch .form-check-input:checked {
+  background-color: #81b1bb;
+  border: none;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #D7B1D7;
+  background-color: #D7B1D7;
+}
+
+.btn-outline-secondary{
+  border-color: var(--bs-border-color);
+}
+
+.btn-outline-secondary:hover{
+  border-color: var(--bs-border-color);
+  background-color: #4f9aac;
+}
+
+.gear-icon{
+  width: 1.5rem;
+}
+
+.settings-icon{
+  width: 1.3rem;
+}
+
+.vertical-line{
+  border-left: 1px solid #e2e2e2;
+  height: 3.5vh;
+  display: none;
+}
+
+.advanced-settings-input{
+  height: 1.5rem;
+}
+
+.advanced-options {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.advanced-options > div {
+  margin-bottom: 1vh;
+}
+
+.expiry{
+  flex-direction: column;
+}
+
+.expiry-container{
+  margin-top: 0.4rem;
+}
+
 /* Cookie banner */
 
 .cookie-banner {
@@ -166,7 +252,7 @@ body {
 
 /* Links */
 
-a {
+a, .text-blue {
   color: #529ab1 !important;
 }
 
@@ -177,7 +263,7 @@ a:link {
   text-decoration: none;
 }
 
-/* Smaller screens */
+/* Responsiveness */
 @media (max-width: 1080px) {
 
   .scrollable-text-container {
@@ -216,5 +302,36 @@ a:link {
   .cookie-banner > .cookie-text {
     text-align: center;
     margin-bottom: 0.7vh;
+  }
+}
+
+@media (min-width: 1200px) {
+  .advanced-options {
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .vertical-line{
+    display: block;
+    border-left: 1px solid #e2e2e2;
+    height: 3.5vh;
+  }
+
+  .advanced-options > div {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 400px) {
+  .expiry{
+    flex-direction: row;
+    align-items: flex-start!important;
+  }
+
+  .expiry-container{
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0.6rem;
   }
 }
