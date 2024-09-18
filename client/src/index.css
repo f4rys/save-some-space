@@ -333,3 +333,21 @@ a:link {
     margin-left: 0.6rem;
   }
 }
+
+.shortened-url-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.qr-code-image {
+  width: calc(10vh + 5vw);
+}
+
+@media (max-width: 500px) {
+  .result-container, .shortened-url-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}

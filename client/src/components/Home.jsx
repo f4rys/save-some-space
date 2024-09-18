@@ -2,11 +2,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import PropTypes from "prop-types";
+import QRCode from "qrcode";
 import { useState } from "react";
 import gearIcon from "../assets/gear.png";
 import qrIcon from "../assets/qr.png";
 import clockIcon from "../assets/clock.png";
-import fileIcon from "../assets/file.png";
+import penIcon from "../assets/pen.png";
 
 function Home({
   cookiesAccepted,
@@ -25,6 +26,8 @@ function Home({
   setQrEnabled,
   expirationDays,
   setExpirationDays,
+  qrCodeUrl,
+  setQrCodeUrl,
 }) {
   const apiUrl = import.meta.env.VITE_API_URL;
   const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
@@ -59,6 +62,15 @@ function Home({
         fullUrl: fullUrl,
       });
       setShortenedUrl(response.data.shortUrl);
+
+      if (qrEnabled) {
+        const qrCode = await QRCode.toDataURL(
+          `https://savesome.space/${response.data.shortUrl}`
+        );
+        setQrCodeUrl(qrCode);
+      } else {
+        setQrCodeUrl("");
+      }
     } catch (error) {
       console.error("Error shortening URL:", error);
       setErrorMessage("failed to shorten the URL. please try again.");
@@ -105,7 +117,11 @@ function Home({
               id="advancedOptionsButton"
               onClick={toggleAdvancedOptions}
             >
-              <img src={gearIcon} alt="Settings" className="gear-icon"></img>
+              <img
+                src={gearIcon}
+                alt="Settings"
+                className="settings-icon"
+              ></img>
             </button>
           </div>
 
@@ -153,7 +169,11 @@ function Home({
               </div>
               <div className="vertical-line"></div>
               <div className="d-flex align-items-center">
-                <img src={fileIcon} alt="File" className="settings-icon"></img>
+                <img
+                  src={penIcon}
+                  alt="Pen"
+                  className="settings-icon me-1"
+                ></img>
                 <label className="mx-1 text-blue">savesome.space/</label>
                 <input
                   type="text"
@@ -178,21 +198,29 @@ function Home({
         </form>
 
         {shortenedUrl && (
-          <div className="text-center h4" id="shortenedUrlDisplay">
-            <div id="shortenedUrl" className="mb-2 mt-4 shortened-url">
-              <a
-                href={`/${shortenedUrl}`}
-                target="_blank"
-              >{`savesome.space/${shortenedUrl}`}</a>
-            </div>
-            <div className="mt-3">
-              <button
-                id="copyButton"
-                className="btn btn-primary shortened-url-button"
-                onClick={handleCopyClick}
-              >
-                copy to clipboard
-              </button>
+          <div className="result-container d-flex justify-content-center align-items-center mt-3">
+            {qrCodeUrl && (
+              <div className="qr-code-container me-2">
+                <img src={qrCodeUrl} alt="QR Code" className="qr-code-image" />
+              </div>
+            )}
+            <div className={`shortened-url-container mt-2 ${
+              qrCodeUrl ? "qr-layout" : "d-flex align-items-center justify-content-center"} }`}>
+              <div id="shortenedUrl" className="shortened-url h4">
+                <a
+                  href={`/${shortenedUrl}`}
+                  target="_blank"
+                >{`savesome.space/${shortenedUrl}`}</a>
+              </div>
+              <div className="mt-3">
+                <button
+                  id="copyButton"
+                  className="btn btn-primary shortened-url-button"
+                  onClick={handleCopyClick}
+                >
+                  copy to clipboard
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -236,6 +264,8 @@ Home.propTypes = {
   setQrEnabled: PropTypes.func.isRequired,
   expirationDays: PropTypes.string.isRequired,
   setExpirationDays: PropTypes.func.isRequired,
+  qrCodeUrl: PropTypes.string,
+  setQrCodeUrl: PropTypes.func.isRequired,
 };
 
 export default Home;

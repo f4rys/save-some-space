@@ -23,6 +23,7 @@ function App() {
   const [customUrl, setCustomUrl] = useState("");
   const [qrEnabled, setQrEnabled] = useState(false);
   const [expirationDays, setExpirationDays] = useState("");
+  const [qrCodeUrl, setQrCodeUrl] = useState("");
 
   const location = useLocation();
   const isHome = location.pathname === "/";
@@ -35,6 +36,7 @@ function App() {
     setExpirationDays("");
     setCustomUrl("");
     setQrEnabled(false);
+    setQrCodeUrl("");
 
     if (fullUrlInputRef.current) {
       fullUrlInputRef.current.value = "";
@@ -71,6 +73,8 @@ function App() {
                   setQrEnabled={setQrEnabled}
                   expirationDays={expirationDays}
                   setExpirationDays={setExpirationDays}
+                  qrCodeUrl={qrCodeUrl}
+                  setQrCodeUrl={setQrCodeUrl}
                 />
               }
             />
