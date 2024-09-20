@@ -65,18 +65,22 @@ app.get("/", async (req, res) => {
 
 app.post("/shortUrls", async (req, res) => {
   try {
-    const existingShortUrl = await ShortUrl.findOne({
-      short: req.body.shortUrl,
-    }).exec();
-    if (existingShortUrl) {
-      return res.sendStatus(409);
+    const { fullUrl, customUrl } = req.body;
+
+    let shortId = customUrl;
+
+    if (customUrl) {
+      const existingCustomUrl = await ShortUrl.findOne({ short: customUrl }).exec();
+      if (existingCustomUrl) {
+        return res.status(409).json({ error: "Custom URL already exists" });
+      }
+    } else {
+      shortId = await generateUniqueShortId();
     }
 
-    const newShortId = await generateUniqueShortId();
-
     const newShortUrl = new ShortUrl({
-      full: req.body.fullUrl,
-      short: newShortId,
+      full: fullUrl,
+      short: shortId,
     });
 
     await newShortUrl.save();
@@ -86,6 +90,7 @@ app.post("/shortUrls", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 app.get("/:shortUrl", async (req, res) => {
   const shortUrl = await ShortUrl.findOne({

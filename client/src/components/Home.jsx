@@ -46,23 +46,25 @@ function Home({
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     if (!cookiesAccepted) {
       setShowCookieMessage(true);
       return;
     }
-
+  
     setShowCookieMessage(false);
     setErrorMessage("");
-
+  
     const fullUrl = event.target.fullUrl.value;
-
+  
     try {
       const response = await axios.post(`${apiUrl}/shortUrls`, {
         fullUrl: fullUrl,
+        customUrl: customUrl || null,
       });
+  
       setShortenedUrl(response.data.shortUrl);
-
+  
       if (qrEnabled) {
         const qrCode = await QRCode.toDataURL(
           `https://savesome.space/${response.data.shortUrl}`
@@ -72,10 +74,16 @@ function Home({
         setQrCodeUrl("");
       }
     } catch (error) {
-      console.error("Error shortening URL:", error);
-      setErrorMessage("failed to shorten the URL. please try again.");
+      if (error.response && error.response.status === 409) {
+        setShortenedUrl("");
+        setErrorMessage("Custom URL already exists. Please choose another.");
+      } else {
+        setShortenedUrl("");
+        setErrorMessage("Failed to shorten the URL. Please try again.");
+      }
     }
   };
+  
 
   const handleCopyClick = async () => {
     try {
