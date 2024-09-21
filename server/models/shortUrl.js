@@ -9,6 +9,10 @@ const shortUrlSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+  },
+  expiresAt: {
+    type: Date,
+    default: null,
   }
 });
 

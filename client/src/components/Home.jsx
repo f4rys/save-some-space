@@ -31,6 +31,7 @@ function Home({
 }) {
   const apiUrl = import.meta.env.VITE_API_URL;
   const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
+  const [expirationMessage, setExpirationMessage] = useState("");
 
   const handleExpireAfterToggle = () => {
     setExpireAfterEnabled(!expireAfterEnabled);
@@ -56,14 +57,23 @@ function Home({
     setErrorMessage("");
   
     const fullUrl = event.target.fullUrl.value;
+    const submittedExpirationDays = expireAfterEnabled ? null : expirationDays;
+    const neverExpire = expireAfterEnabled;
   
     try {
       const response = await axios.post(`${apiUrl}/shortUrls`, {
         fullUrl: fullUrl,
         customUrl: customUrl || null,
+        expirationDays: submittedExpirationDays || 7,
+        neverExpire: neverExpire,
       });
   
       setShortenedUrl(response.data.shortUrl);
+  
+      const expiryDate = response.data.expiresAt
+        ? new Date(response.data.expiresAt).toLocaleDateString()
+        : "never";
+      setExpirationMessage(`expires on: ${expiryDate}`);
   
       if (qrEnabled) {
         const qrCode = await QRCode.toDataURL(
@@ -76,19 +86,22 @@ function Home({
     } catch (error) {
       if (error.response && error.response.status === 409) {
         setShortenedUrl("");
-        setErrorMessage("Custom URL already exists. Please choose another.");
-      } else {
+        setErrorMessage("custom URL already exists. please choose another.");
+      }
+      else if (error.response && error.response.status === 403) {
         setShortenedUrl("");
-        setErrorMessage("Failed to shorten the URL. Please try again.");
+        setErrorMessage("this custom URL is forbidden. please choose another.");
+      }
+      else {
+        setShortenedUrl("");
+        setErrorMessage("failed to shorten the URL. please try again.");
       }
     }
   };
-  
 
   const handleCopyClick = async () => {
     try {
       await navigator.clipboard.writeText(`savesome.space/${shortenedUrl}`);
-
       const copyButton = document.getElementById("copyButton");
       copyButton.textContent = "copied to clipboard";
     } catch (error) {
@@ -155,10 +168,10 @@ function Home({
                     alt="Clock"
                     className="settings-icon"
                   ></img>
-                  <label className="mx-2">expires in:</label>
+                  <label className="mx-2">expires in (days):</label>
                   <input
                     className="form-control advanced-settings-input expire-form"
-                    placeholder="days"
+                    placeholder="7"
                     min="1"
                     disabled={expireAfterEnabled}
                     value={expirationDays}
@@ -212,15 +225,22 @@ function Home({
                 <img src={qrCodeUrl} alt="QR Code" className="qr-code-image" />
               </div>
             )}
-            <div className={`shortened-url-container mt-2 ${
-              qrCodeUrl ? "qr-layout" : "d-flex align-items-center justify-content-center"} }`}>
+            <div
+              className={`shortened-url-container mt-2 ${
+                qrCodeUrl
+                  ? "qr-layout"
+                  : "d-flex align-items-center justify-content-center"
+              }`}
+            >
               <div id="shortenedUrl" className="shortened-url h4">
-                <a
-                  href={`/${shortenedUrl}`}
-                  target="_blank"
-                >{`savesome.space/${shortenedUrl}`}</a>
+                <a href={`/${shortenedUrl}`} target="_blank">
+                  {`savesome.space/${shortenedUrl}`}
+                </a>
               </div>
-              <div className="mt-3">
+              <div>
+                {expirationMessage && <span>{expirationMessage}</span>}
+              </div>
+              <div className="mt-2">
                 <button
                   id="copyButton"
                   className="btn btn-primary shortened-url-button"

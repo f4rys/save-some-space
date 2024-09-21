@@ -24,6 +24,7 @@
     "express-session": "^1.18.0",
     "jest": "^29.7.0",
     "mongoose": "^8.6.0",
+    "node-cron": "^3.0.3",
     "save-some-space-server": "file:",
     "server": "file:",
     "shortid": "^2.2.16",
