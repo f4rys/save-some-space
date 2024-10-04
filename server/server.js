@@ -6,6 +6,7 @@ const session = require("express-session");
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
+const cron = require('node-cron');
 const generateUniqueShortId = require("./generateUniqueShortId");
 
 const app = express();
@@ -37,6 +38,8 @@ const corsOptions = {
   allowedHeaders: ["content-type", "Authorization"],
 };
 
+const reservedRoutes = ["/about", "/privacy-policy", "/terms-of-service"];
+
 app.use(cors(corsOptions));
 app.use(limiter);
 app.use(express.json());
@@ -65,22 +68,40 @@ app.get("/", async (req, res) => {
 
 app.post("/shortUrls", async (req, res) => {
   try {
-    const existingShortUrl = await ShortUrl.findOne({
-      short: req.body.shortUrl,
-    }).exec();
-    if (existingShortUrl) {
-      return res.sendStatus(409);
+    const { fullUrl, customUrl, expirationDays, neverExpire } = req.body;
+    
+    let shortId = customUrl;
+    let expiresAt = null;
+
+    if (customUrl && reservedRoutes.includes(`/${customUrl}`)) {
+      return res.status(403).json({ error: "this custom URL is forbidden." });
     }
 
-    const newShortId = await generateUniqueShortId();
+    if (customUrl) {
+      const existingCustomUrl = await ShortUrl.findOne({ short: customUrl }).exec();
+      if (existingCustomUrl) {
+        return res.status(409).json({ error: "this custom URL already exists." });
+      }
+    } else {
+      shortId = await generateUniqueShortId();
+    }
+
+    if (!neverExpire) {
+      if (expirationDays) {
+        expiresAt = new Date(Date.now() + expirationDays * 24 * 60 * 60 * 1000);
+      } else {
+        expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+      }
+    }
 
     const newShortUrl = new ShortUrl({
-      full: req.body.fullUrl,
-      short: newShortId,
+      full: fullUrl,
+      short: shortId,
+      expiresAt: expiresAt,
     });
 
     await newShortUrl.save();
-    res.json({ shortUrl: newShortUrl.short });
+    res.json({ shortUrl: newShortUrl.short, expiresAt: newShortUrl.expiresAt });
   } catch (error) {
     console.error("Error in /shortUrls:", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -101,6 +122,16 @@ app.get("/:shortUrl", async (req, res) => {
     : "https://savesome.space";
 
   res.json({ url: sanitizedUrl });
+});
+
+cron.schedule('0 0 * * *', async () => {
+  try {
+    const now = new Date();
+    const result = await ShortUrl.deleteMany({ expiresAt: { $lte: now } });
+    console.log(`${result.deletedCount} expired URLs deleted.`);
+  } catch (error) {
+    console.error("Error deleting expired URLs:", error);
+  }
 });
 
 const port = process.env.PORT || 8080;
