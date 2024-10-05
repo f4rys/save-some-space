@@ -71,4 +71,65 @@ describe("ShortUrl Model and Server", () => {
     expect(res.status).toBe(404);
   });
 
+    test("should return an error for forbidden custom URLs", async () => {
+    const fullUrl = "https://www.example.com";
+    const forbiddenCustomUrl = "about";
+
+    const res = await testServer.post("/shortUrls").send({
+      fullUrl: fullUrl,
+      customUrl: forbiddenCustomUrl,
+    });
+
+    expect(res.status).toBe(403);
+    expect(res.body).toHaveProperty("error", "this custom URL is forbidden.");
+  });
+
+  test("should return an error for already existing custom URL", async () => {
+    const fullUrl = "https://www.example.com";
+    const customUrl = "my-custom-url";
+
+    await testServer.post("/shortUrls").send({ fullUrl: fullUrl, customUrl: customUrl });
+
+    const res = await testServer.post("/shortUrls").send({
+      fullUrl: "https://www.another-url.com",
+      customUrl: customUrl,
+    });
+
+    expect(res.status).toBe(409);
+    expect(res.body).toHaveProperty("error", "this custom URL already exists.");
+  });
+
+  test("should set a default expiration date of 7 days if none provided", async () => {
+    const fullUrl = "https://www.no-expiry-specified.com";
+
+    const res = await testServer.post("/shortUrls").send({ fullUrl: fullUrl });
+
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty("shortUrl");
+    expect(new Date(res.body.expiresAt)).toBeTruthy();
+
+    const expiresAt = new Date(res.body.expiresAt);
+    const expectedExpiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+
+    expect(expiresAt.toDateString()).toBe(expectedExpiresAt.toDateString());
+  });
+
+  test("should set custom expiration date based on user input", async () => {
+    const fullUrl = "https://www.expire-in-3-days.com";
+    const expirationDays = 3;
+
+    const res = await testServer.post("/shortUrls").send({
+      fullUrl: fullUrl,
+      expirationDays: expirationDays,
+    });
+
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty("shortUrl");
+
+    const expiresAt = new Date(res.body.expiresAt);
+    const expectedExpiresAt = new Date(Date.now() + expirationDays * 24 * 60 * 60 * 1000);
+
+    expect(expiresAt.toDateString()).toBe(expectedExpiresAt.toDateString());
+  });
+
 });
