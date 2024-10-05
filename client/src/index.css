@@ -6,12 +6,12 @@
 }
 
 body {
-  background-color: #FAF9F8;
+  background-color: #f5f5f5;
 }
 
 .assistant-semibold{
   font-family: "Assistant", sans-serif;
-  color: #1E3706;
+  color: #3d3d3d;
   font-weight: 600;
   letter-spacing: .1rem;
   font-style: normal;
@@ -20,7 +20,7 @@ body {
 
 .showdex {
   font-family: "Showdex", sans-serif;
-  color: #DDDCDA;
+  color: #dbdbdb;
   font-style: normal;
   font-size: 10rem;
   line-height: 10rem;
@@ -33,7 +33,7 @@ body {
   font-style: normal;
   font-size: 3rem;
   letter-spacing: .3rem;
-  color: #1E3706;
+  color: #3d3d3d;
 }
 
 a,
@@ -42,7 +42,6 @@ a:active,
 a:visited,
 a:link {
   text-decoration: none;
-  color: #1E3706;
 }
 
 .scissors{
