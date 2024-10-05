@@ -5,10 +5,12 @@ import TermsOfService from "./components/TermsOfService.jsx";
 import PrivacyPolicy from "./components/PrivacyPolicy.jsx";
 import About from "./components/About.jsx";
 import CatchAll from "./components/CatchAll.jsx";
+import NavBar from "./components/NavBar.jsx";
 
 function App() {
   return (
     <>
+      <NavBar />
           <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/terms-of-service" element={<TermsOfService />} />

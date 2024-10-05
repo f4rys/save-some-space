@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@600&display=swap');
+
+body {
+  background-color: #FAF9F8;
+}
+
+.assistant-semibold{
+  font-family: "Assistant", sans-serif;
+  color: #1E3706;
+  font-weight: 600;
+  letter-spacing: .1rem;
+  font-style: normal;
+  font-size: 1.3rem;
+}
+
+a,
+a:hover,
+a:active,
+a:visited,
+a:link {
+  text-decoration: none;
+  color: #1E3706;
+}
+
