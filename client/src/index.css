@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@600&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap');
 @font-face {
   font-family: Showdex;
   src: url(assets/Showdex.ttf);
@@ -27,6 +27,15 @@ body {
   text-align: center;
 }
 
+.tenor-sans-regular {
+  font-family: "Tenor Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 3rem;
+  letter-spacing: .3rem;
+  color: #1E3706;
+}
+
 a,
 a:hover,
 a:active,
@@ -41,4 +50,14 @@ a:link {
   transform: rotate(20deg);
   top: -4rem;
   left: 6rem;
+}
+
+.shorten-button {
+	background:linear-gradient(to bottom, #796451e7 1%, #BBA284 100%);
+  border: 0;
+	border-radius:38px;
+	cursor:pointer;
+	color:#ffffff;
+	padding: .3rem 2.3rem;
+  font-size: 1.2rem;
 }

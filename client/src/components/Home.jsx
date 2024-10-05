@@ -13,7 +13,10 @@ function Home() {
             <div className="showdex">SPACE.</div>
           </div>
         </div>
-        <div className="col"> URL SHORTENING</div>
+        <div className="col mt-5">
+          <div className="tenor-sans-regular">URL SHORTENER</div>
+          <button className="shorten-button assistant-semibold">SHORTEN</button>
+        </div>
       </div>
     </>
   );
