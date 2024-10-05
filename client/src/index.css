@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@600&display=swap');
 
+@font-face {
+  font-family: Showdex;
+  src: url(assets/Showdex.ttf);
+}
+
 body {
   background-color: #FAF9F8;
 }
@@ -13,6 +18,15 @@ body {
   font-size: 1.3rem;
 }
 
+.showdex {
+  font-family: "Showdex", sans-serif;
+  color: #DDDCDA;
+  font-style: normal;
+  font-size: 10rem;
+  line-height: 10rem;
+  text-align: center;
+}
+
 a,
 a:hover,
 a:active,
@@ -22,3 +36,9 @@ a:link {
   color: #1E3706;
 }
 
+.scissors{
+  width: 19rem;
+  transform: rotate(20deg);
+  top: -4rem;
+  left: 6rem;
+}
