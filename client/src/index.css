@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@500&600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap');
 @font-face {
   font-family: Showdex;
@@ -12,10 +12,19 @@ body {
 .assistant-semibold{
   font-family: "Assistant", sans-serif;
   color: #3d3d3d;
-  font-weight: 600;
-  letter-spacing: .1rem;
   font-style: normal;
+}
+
+.header-font{
+  font-weight: 600;
   font-size: 1.3rem;
+  letter-spacing: .1rem;
+}
+
+.body-font{
+  font-weight: 500;
+  font-size: 1.2rem;
+  letter-spacing: 0;
 }
 
 .showdex {
@@ -59,4 +68,84 @@ a:link {
 	color:#ffffff;
 	padding: .3rem 2.3rem;
   font-size: 1.2rem;
+}
+
+.url-input {
+	font-size: 1.2rem;
+	width: 80%;
+  outline: none;
+	background: #F5F5F5;
+	color: #000000;
+	border: 1px solid #DDDCDA;
+	border-radius: 20px;
+	transition: .3s ease;
+}
+
+.url-input:focus {
+	background: #F2F2F2;
+	border: 1px solid #796451e7!important;
+	border-radius: 15px;
+}
+
+.url-input::placeholder {
+	color: #000000;
+}
+
+.settings-icon {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.checkbox {
+  appearance: none;
+  position: relative;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: 1px solid #DDDCDA;
+  cursor: pointer;
+}
+
+.checkbox:checked {
+  background-color: #bba284;
+}
+
+.checkbox:checked::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 5px;
+  width: 12px;
+  height: 6px;
+  border-bottom: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  transform: rotate(-45deg);
+}
+
+.settings-input {
+	font-size: 1rem;
+  outline: none;
+	background: #F5F5F5;
+	color: #000000;
+	border: 1px solid #DDDCDA;
+	border-radius: 20px;
+	transition: .3s ease;
+}
+
+.settings-input:focus {
+	background: #F2F2F2;
+	border: 1px solid #796451e7!important;
+	border-radius: 15px;
+}
+
+.settings-input::placeholder {
+	color: #000000;
+}
+
+.expiry-input{
+  width: 10%;
+}
+
+.custom-url-input{
+  width: 30%;
 }
