@@ -16,46 +16,47 @@ function Home() {
             <div className="showdex">SPACE.</div>
           </div>
         </div>
-        <div className="col mt-5">
-          <div className="tenor-sans-regular">URL SHORTENER</div>
-          <div className="my-4">
-            <input
-              className="url-input px-3 py-2"
-              type="text"
-              placeholder="https://www.example.com/"
-            ></input>
-          </div>
-          <div className="ms-2">
-          <div className="d-flex align-items-center mb-2">
-            <img className="settings-icon me-2" src={qr}></img>
-            <div className="assistant-semibold body-font me-2">QR Code</div>
+        <div className="col center-vertically">
+          <div>
+            <div className="tenor-sans-regular">URL SHORTENER</div>
+            <div className="my-4">
               <input
-                type="checkbox"
-                className="checkbox"
-              />
-          </div>
-          <div className="d-flex align-items-center mb-2">
-            <img className="settings-icon me-2" src={clock}></img>
-            <div className="assistant-semibold body-font">
-              Expires in (days):
+                className="url-input px-3 py-2"
+                type="text"
+                placeholder="https://www.example.com/"
+              ></input>
             </div>
-            <input
-              className="settings-input expiry-input ms-2 px-3"
-              type="text"
-              placeholder="7"
-            ></input>
+            <div className="ms-2">
+            <div className="d-flex align-items-center mb-2">
+                <img className="settings-icon me-2" src={note}></img>
+                <div className="assistant-semibold body-font">savesome.space/</div>
+                <input
+                  className="settings-input custom-url-input ms-2 px-3"
+                  type="text"
+                  placeholder=""
+                ></input>
+              </div>
+              <div className="d-flex align-items-center mb-2">
+                <img className="settings-icon me-2" src={clock}></img>
+                <div className="assistant-semibold body-font">
+                  Expires in (days):
+                </div>
+                <input
+                  className="settings-input expiry-input ms-2 px-3"
+                  type="text"
+                  placeholder="7"
+                ></input>
+              </div>
+              <div className="d-flex align-items-center mb-2 align-self-center">
+                <img className="settings-icon me-2" src={qr}></img>
+                <div className="assistant-semibold body-font me-2">QR Code</div>
+                <input type="checkbox" className="checkbox" />
+              </div>
+            </div>
+            <button className="shorten-button assistant-semibold mt-3">
+              SHORTEN
+            </button>
           </div>
-          <div className="d-flex align-items-center mb-2">
-            <img className="settings-icon me-2" src={note}></img>
-            <div className="assistant-semibold body-font">savesome.space/</div>
-            <input
-              className="settings-input custom-url-input ms-2 px-3"
-              type="text"
-              placeholder=""
-            ></input>
-          </div>
-          </div>
-          <button className="shorten-button assistant-semibold mt-3">SHORTEN</button>
         </div>
       </div>
     </>

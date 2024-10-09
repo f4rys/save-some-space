@@ -149,3 +149,9 @@ a:link {
 .custom-url-input{
   width: 30%;
 }
+
+.center-vertically {
+  display: flex;
+  align-items: center;
+  height: 60vh;
+}
