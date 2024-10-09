@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import scissors1 from "../assets/scissors1.png";
+import scissors1 from "../assets/sss.png";
 import qr from "../assets/qr.png";
 import clock from "../assets/clock.png";
 import note from "../assets/note.png";
@@ -7,14 +7,9 @@ import note from "../assets/note.png";
 function Home() {
   return (
     <>
-      <div className="row mt-5 mx-5">
-        <div className="col position-relative ms-5">
-          <img className="scissors position-absolute z-3" src={scissors1}></img>
-          <div className="position-absolute">
-            <div className="showdex">SAVE</div>
-            <div className="showdex">SOME</div>
-            <div className="showdex">SPACE.</div>
-          </div>
+      <div className="row mt-4 mx-5">
+        <div className="col ms-4">
+          <img className="scissors" src={scissors1}></img>
         </div>
         <div className="col center-vertically">
           <div>
