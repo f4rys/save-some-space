@@ -40,6 +40,10 @@ a:link {
   text-decoration: none;
 }
 
+a:hover{
+  color: #BBA284;
+}
+
 .scissors{
   width: 70vh;
 }
