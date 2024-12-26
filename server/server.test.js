@@ -71,7 +71,7 @@ describe("ShortUrl Model and Server", () => {
     expect(res.status).toBe(404);
   });
 
-    test("should return an error for forbidden custom URLs", async () => {
+  test("should return an error for forbidden custom URLs", async () => {
     const fullUrl = "https://www.example.com";
     const forbiddenCustomUrl = "about";
 
@@ -88,7 +88,9 @@ describe("ShortUrl Model and Server", () => {
     const fullUrl = "https://www.example.com";
     const customUrl = "my-custom-url";
 
-    await testServer.post("/shortUrls").send({ fullUrl: fullUrl, customUrl: customUrl });
+    await testServer
+      .post("/shortUrls")
+      .send({ fullUrl: fullUrl, customUrl: customUrl });
 
     const res = await testServer.post("/shortUrls").send({
       fullUrl: "https://www.another-url.com",
@@ -127,9 +129,10 @@ describe("ShortUrl Model and Server", () => {
     expect(res.body).toHaveProperty("shortUrl");
 
     const expiresAt = new Date(res.body.expiresAt);
-    const expectedExpiresAt = new Date(Date.now() + expirationDays * 24 * 60 * 60 * 1000);
+    const expectedExpiresAt = new Date(
+      Date.now() + expirationDays * 24 * 60 * 60 * 1000
+    );
 
     expect(expiresAt.toDateString()).toBe(expectedExpiresAt.toDateString());
   });
-
 });

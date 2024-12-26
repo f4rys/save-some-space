@@ -143,3 +143,19 @@ a:hover{
   align-items: center;
   height: 60vh;
 }
+
+.carousel-item p {
+  margin-bottom: 10vh;
+  padding: 1rem;
+}
+
+.carousel-indicators [data-bs-target] {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+
+.carousel-indicators .active {
+  background-color: #007bff;
+}
